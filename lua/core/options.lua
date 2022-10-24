@@ -60,11 +60,14 @@ opt.shortmess:append "sI"
 opt.wrap = false         -- No wrap text
 
 -- Build options options
-opt.makeprg = 'build' -- TODO Created other build configurations. Other plugin?
+opt.makeprg = 'rm -rf ./build;cmake -B ./build;cmake --build ./build'
 
 -- Mark tabs, dungling spaces and end of lines
 opt.listchars = { tab = '▶ ', trail = '·', extends = '↵', nbsp = '.' }
 opt.list = true
+
+--desable unused providers
+g.loaded_perl_provider = 0
 -----------------------------------------------------------
 -- Ivan's options end
 -----------------------------------------------------------

@@ -32,7 +32,7 @@ vim.cmd([[
 -- Add additional capabilities supported by nvim-cmp
 -- See: https://github.com/neovim/nvim-lspconfig/wiki/Autocompletion
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
+capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 
 capabilities.textDocument.completion.completionItem.documentationFormat = { 'markdown', 'plaintext' }
 capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -137,8 +137,7 @@ end
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches.
 -- Add your language server below:
---local servers = { 'bashls', 'pyright', 'html', 'cssls', 'tsserver' } --enable for ccls
-local servers = { 'bashls', 'pyright', 'html', 'clangd', 'tsserver' }
+local servers = { 'bashls', 'pyright', 'html', 'cssls', 'clangd', 'tsserver' }
 
 -- Call setup
 for _, lsp in ipairs(servers) do
@@ -160,7 +159,7 @@ end
 --   capabilities = capabilities,
 --   init_options = {
 --     cache = {
---       compilationDatabaseDirectory = "DIR";
+--       compilationDatabaseDirectory = "build";
 --       directory = "~/.cache/ccls";
 --     };
 --     clang = {
@@ -171,8 +170,8 @@ end
 --       threads = 16;
 --       timeout = 500000;
 --       whitelist = {
---         "DIR",
---         "DIR"
+--         ".",
+--         "."
 --       };
 --     };
 --     request = {
@@ -189,7 +188,7 @@ require'lspconfig'.clangd.setup{
      "--clang-tidy",
      "--completion-style=bundled",
      "--header-insertion=never",
-     "--compile-commands-dir=DIR",
+     "--compile-commands-dir=build",
      "--query-driver=g++"
    };
 }

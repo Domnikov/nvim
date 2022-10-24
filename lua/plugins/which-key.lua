@@ -22,9 +22,9 @@ wk.register({
     ["<space>"] = {h.cmdify(" " ..
       ":lua require('telescope.builtin').find_files(" ..
         "{search_dirs={" ..
-          "'DIR'," ..
-          "'DIR'," ..
-          "'DIR'" ..
+          "'add_new_dir_here'," ..
+          "'and_here'," ..
+          "'.'" ..
         "}, require('telescope.themes').get_dropdown{previewer = false}})"), "Find Files"},
 
     b = {h.cmdify("Telescope buffers"), "Buffers"},
