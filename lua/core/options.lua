@@ -60,7 +60,7 @@ opt.shortmess:append "sI"
 opt.wrap = false         -- No wrap text
 
 -- Build options options
-opt.makeprg = 'rm -rf ./build;cmake -B ./build;cmake --build ./build'
+opt.makeprg = 'rm -rf ./build && cmake -B ./build && cmake --build ./build'
 
 -- Mark tabs, dungling spaces and end of lines
 opt.listchars = { tab = '▶ ', trail = '·', extends = '↵', nbsp = '.' }
