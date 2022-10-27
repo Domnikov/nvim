@@ -81,8 +81,8 @@ nvim_tree.setup {
           symlink_open = "",
         },
         git = {
-          unstaged = "✗",
-          staged = "✓",
+          unstaged = "❗",
+          staged = "✔️",
           unmerged = "",
           renamed = "➜",
           untracked = "★",

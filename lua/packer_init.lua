@@ -95,10 +95,13 @@ local use = packer.use
   }
 
   -- Color schemes
-  use {
-    'sainnhe/gruvbox-material'
-  }
-  use 'fenetikm/falcon'
+  -- Ivan's
+  use { 'Mofiqul/vscode.nvim', commit = "c5125820a0915ef50f03fae10423c43dc49c66b1" }
+  -- Markus's
+  --use {
+  --  'sainnhe/gruvbox-material'
+  --}
+  --use 'fenetikm/falcon'
 
   -- LSP
   use {
