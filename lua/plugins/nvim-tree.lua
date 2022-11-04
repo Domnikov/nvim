@@ -27,7 +27,8 @@ nvim_tree.setup {
   sort_by = "name",
   update_cwd = true,
   view = {
-    width = 32,
+    adaptive_size = true,
+--    width = 32,
 --    height = 30,
     hide_root_folder = false,
     side = "left",
@@ -53,7 +54,7 @@ nvim_tree.setup {
       icons = {
         corner = "└ ",
         edge = "│ ",
-        none = "  ",
+        none = "  "
       },
     },
     icons = {

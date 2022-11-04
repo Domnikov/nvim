@@ -68,6 +68,22 @@ opt.list = true
 
 --desable unused providers
 g.loaded_perl_provider = 0
+
+-- Use system clipboard
+g.clipboard = {
+    name = 'myClipboard',
+    copy = {
+        ["+"] = {'my_vim_copy.sh'},
+        ["*"] = {'my_vim_copy.sh'},
+    },
+    paste = {
+        ["+"] = {'my_vim_paste.sh'},
+        ["*"] = {'my_vim_paste.sh'},
+    },
+    cache_enabled = 1,
+}
+
+vim.api.nvim_set_option("clipboard","unnamedplus")
 -----------------------------------------------------------
 -- Ivan's options end
 -----------------------------------------------------------

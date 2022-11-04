@@ -20,19 +20,22 @@ wk.register({
   },
   ["<space>"] = {
     ["<space>"] = {h.cmdify(" " ..
-      ":lua require('telescope.builtin').find_files(" ..
-        "{search_dirs={" ..
-          "'add_new_dir_here'," ..
-          "'and_here'," ..
-          "'.'" ..
-        "}, require('telescope.themes').get_dropdown{previewer = false}})"), "Find Files"},
+      ":lua " ..
+      "require('telescope.builtin')." ..
+      "find_files(" ..
+      "{search_dirs={" ..
+        "'add_new_dir_here'," ..
+        "'and_here'," ..
+        "'.'}, " ..
+      "layout_config={height=0.99, width=0.99}})"
+      ), "Find Files"},
 
     b = {h.cmdify("Telescope buffers"), "Buffers"},
     h = {h.cmdify("Telescope command_history"), "History"},
     f = {
       name = "Files...",
       f = {h.cmdify("Telescope find_files"), "File Browser"},
-      l = {h.cmdify("Telescope live_grep"), "Live Grep"},
+      l = {h.cmdify(":lua require('telescope.builtin').live_grep({layout_strategy='vertical',layout_config={height=0.99,width=0.99}})"), "Live Grep"},
       t = {h.cmdify("NvimTreeToggle"), "Open Tree"}
     },
     c = {
