@@ -121,11 +121,11 @@ local use = packer.use
   }
 
   -- Terminal
-  use {
-    'akinsho/toggleterm.nvim',
-    -- opt = true,
-    tag = 'v1.*'
-  }
+  -- use {
+  --   'akinsho/toggleterm.nvim',
+  --   -- opt = true,
+  --   tag = 'v1.*'
+  -- }
 
   -- Autocomplete
   use {
@@ -253,14 +253,14 @@ local use = packer.use
   module = { "dap" },
 --  wants = {"nvim-dap-ui"},
   wants = { "nvim-dap-virtual-text", "DAPInstall.nvim", "nvim-dap-ui"},
-  requires = {
-    "Pocco81/DAPInstall.nvim",
---    "theHamsta/nvim-dap-virtual-text",
-    "rcarriga/nvim-dap-ui",
-    "nvim-telescope/telescope-dap.nvim",
-    { "jbyuki/one-small-step-for-vimkind", module = "osv" },
-  },
-}
+    requires = {
+      "Pocco81/DAPInstall.nvim",
+--      "theHamsta/nvim-dap-virtual-text",
+      "rcarriga/nvim-dap-ui",
+      "nvim-telescope/telescope-dap.nvim",
+      { "jbyuki/one-small-step-for-vimkind", module = "osv" },
+    },
+  }
 
 -- Automatically set up your configuration after cloning packer.nvim
 -- Put this at the end after all plugins

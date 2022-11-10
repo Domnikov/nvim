@@ -14,7 +14,7 @@ if not in_vscode() then
   require('plugins/nvim-lspconfig')
   require('plugins/lualine')
   require('plugins/telescope')
-  require('plugins/toggleterm')
+--  require('plugins/toggleterm')
 --  require('plugins/indent-blankline') Removed by Ivan because it's bothiring him
 -- Ivan's
   require('plugins/trouble')
