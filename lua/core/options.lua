@@ -60,7 +60,7 @@ opt.shortmess:append "sI"
 opt.wrap = false         -- No wrap text
 
 -- Build options options
-opt.makeprg = 'rm -rf ./build && cmake -B ./build -D DATACOLLECTION_LIB_PATH=\'/home/ivan/work/dcf-server/src/lib_data_collection/inc\' && cmake --build ./build'
+opt.makeprg = 'rm -rf ./build && cmake -B ./build -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -D DATACOLLECTION_LIB_PATH=\'/home/ivan/work/dcf-server/src/lib_data_collection/inc\' && cmake --build ./build -j8'
 
 -- Mark tabs, dungling spaces and end of lines
 opt.listchars = { tab = '▶ ', trail = '·', extends = '↵', nbsp = '.' }
@@ -87,6 +87,10 @@ vim.api.nvim_set_option("clipboard","unnamedplus")
 
 -- disable swap
 opt.swapfile = false
+
+-- use unix file format
+opt.fileformat = 'unix'
+opt.fileformats = {'unix'}
 -----------------------------------------------------------
 -- Ivan's options end
 -----------------------------------------------------------
