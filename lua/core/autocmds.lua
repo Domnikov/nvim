@@ -70,3 +70,15 @@ autocmd('BufLeave', {
   command = 'stopinsert'
 })
 
+-- Set indentation to 2 spaces
+augroup('setIndent', { clear = true })
+autocmd('Filetype', {
+  group = 'setIndent',
+  pattern = { 'xml', 'html', 'xhtml', 'css', 'scss', 'javascript', 'typescript',
+    'yaml', 'lua'
+  },
+  command = 'setlocal shiftwidth=2 tabstop=2'
+})
+
+-- Ivan's functions
+autocmd('BufRead ,BufNewFile', {pattern = 'Taskfile', command = 'set filetype=yaml'})
