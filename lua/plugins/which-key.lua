@@ -35,7 +35,7 @@ wk.register({
     f = {
       name = "Files...",
       f = {h.cmdify("Telescope find_files"), "File Browser"},
-      l = {h.cmdify(":lua require('telescope.builtin').live_grep({layout_strategy='vertical',layout_config={height=0.99,width=0.99}})"), "Live Grep"},
+      l = {h.cmdify(":lua require('telescope.builtin').live_grep({default_text = vim.fn.expand('<cword>'),layout_strategy='vertical',layout_config={height=0.99,width=0.99}})"), "Live Grep"},
       L = {h.cmdify(":lua require('telescope.builtin').grep_string({layout_strategy='vertical',layout_config={height=0.99,width=0.99}})"), "Grep String"},
       t = {h.cmdify("NvimTreeToggle"), "Open Tree"}
     },
