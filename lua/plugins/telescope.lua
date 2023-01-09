@@ -8,6 +8,13 @@ telescope.setup({
         ["<esc>"] = actions.close
       }
     }
-  }
-})
+  },
+  pickers = {
+    live_grep = {
+        additional_args = function(opts)
+          return {"-uuu"}
+        end
+      },
+    },
+  })
 

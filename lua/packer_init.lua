@@ -193,10 +193,6 @@ local use = packer.use
     config = function()
     end
   }
-
-  -- Ivan
-  -- Silversearch
-  use({ "kelly-lin/telescope-ag", requires = { { "nvim-telescope/telescope.nvim" } } })
   
   -- Git blame
   -- Cannot find the same on lua
