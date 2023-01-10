@@ -120,12 +120,12 @@ nvim_tree.setup {
   },
   filters = {
     dotfiles = false,
-    custom = {},
+    custom = {'.git', '.repo', '.cache', 'out', '*.xml', '*.tgz'},
     exclude = {},
   },
   git = {
     enable = true,
-    ignore = true,
+    ignore = false,
     timeout = 400,
   },
   actions = {
@@ -170,6 +170,3 @@ nvim_tree.setup {
   },
 }
 
-
--- open current path in neotree
-vim.g.nvim_tree_respect_buf_cwd = 1
