@@ -89,8 +89,8 @@ vim.api.nvim_set_option("clipboard","unnamedplus")
 opt.swapfile = false
 
 -- use unix file format
-opt.fileformat = 'unix'
-opt.fileformats = {'unix'}
+opt.fileformat = 'dos'
+opt.fileformats = {'dos','unix'}
 -----------------------------------------------------------
 -- Ivan's options end
 -----------------------------------------------------------

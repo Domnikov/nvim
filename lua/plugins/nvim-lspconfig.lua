@@ -177,7 +177,7 @@ end
 --   capabilities = capabilities,
 --   init_options = {
 --     cache = {
---       compilationDatabaseDirectory = "build";
+--       compilationDatabaseDirectory = ".";
 --       directory = "~/.cache/ccls";
 --     };
 --     clang = {
@@ -206,8 +206,8 @@ require'lspconfig'.clangd.setup{
      "--clang-tidy",
      "--completion-style=bundled",
      "--header-insertion=never",
-     "--compile-commands-dir=build",
-     "--query-driver=g++"
+     -- "--compile-commands-dir=.",
+     "--query-driver=q++"
    };
 }
 
