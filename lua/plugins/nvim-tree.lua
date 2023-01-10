@@ -99,7 +99,7 @@ nvim_tree.setup {
     auto_open = true,
   },
   update_focused_file = {
-    enable = false,
+    enable = true,
     update_cwd = true,
     ignore_list = {},
   },
@@ -170,3 +170,6 @@ nvim_tree.setup {
   },
 }
 
+
+-- open current path in neotree
+vim.g.nvim_tree_respect_buf_cwd = 1
