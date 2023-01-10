@@ -193,7 +193,7 @@ local use = packer.use
     config = function()
     end
   }
-  
+
   -- Git blame
   -- Cannot find the same on lua
   use 'tpope/vim-fugitive'
