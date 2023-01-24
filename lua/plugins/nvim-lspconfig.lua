@@ -9,7 +9,7 @@
 -- Autocompletion settings of "nvim-cmp" are defined in plugins/nvim-cmp.lua
 
 -- Enable for debugging
--- vim.lsp.set_log_level("debug")
+vim.lsp.set_log_level("debug")
 
 local lsp_status_ok, lspconfig = pcall(require, 'lspconfig')
 if not lsp_status_ok then
@@ -74,7 +74,7 @@ local on_attach = function(client, bufnr)
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
   -- Highlighting references
-  if client.resolved_capabilities.document_highlight then
+  if client.server_capabilities.documentFormattingProvider then
     vim.api.nvim_exec([[
       augroup lsp_document_highlight
         autocmd! * <buffer>
@@ -201,13 +201,14 @@ end
 require'lspconfig'.clangd.setup{
   cmd = { "clangd",
      "-j=10",
-     "--log=error",
+     "--log=error", -- verbose
+     "-pretty",
      "--background-index",
      "--clang-tidy",
      "--completion-style=bundled",
      "--header-insertion=never",
      -- "--compile-commands-dir=.",
-     "--query-driver=q++"
+     "--query-driver=/usr/lib/llvm-14/bin/clang"
    };
 }
 

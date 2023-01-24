@@ -93,6 +93,7 @@ nvim_tree.setup {
       },
     },
     special_files = { "Cargo.toml", "Makefile", "README.md", "readme.md" },
+    symlink_destination = false,
   },
   hijack_directories = {
     enable = true,
@@ -100,7 +101,7 @@ nvim_tree.setup {
   },
   update_focused_file = {
     enable = true,
-    update_cwd = true,
+    update_cwd = false,
     ignore_list = {},
   },
   ignore_ft_on_setup = {},

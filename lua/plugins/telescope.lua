@@ -2,7 +2,18 @@ local actions = require("telescope.actions")
 local telescope = require('telescope')
 telescope.setup({
   defaults = {
-    path_display={"truncate"};
+    vimgrep_arguments = {
+      'rg',
+      '--color=never',
+      '--no-heading',
+      '--with-filename',
+      '--line-number',
+      '--column',
+      '--smart-case',
+      '--ignore-file',
+      '~/sources/.ignore'
+    },
+    path_display={"truncate"},
     mappings = {
       i = {
         ["<esc>"] = actions.close
