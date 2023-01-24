@@ -24,10 +24,10 @@ wk.register({
       "require('telescope.builtin')." ..
       "find_files(" ..
       "{search_dirs={" ..
-        "'add_new_dir_here'," ..
-        "'and_here'," ..
-        "'.'}, " ..
-        "no_ignore=true," ..
+        "'disabled_android'," ..
+        "'.'," ..
+        "'disabled_tools'}, " ..
+        -- "no_ignore=true," ..
       "layout_config={height=0.99, width=0.99}})"
       ), "Find Files"},
 
