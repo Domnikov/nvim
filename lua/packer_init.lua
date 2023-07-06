@@ -121,11 +121,7 @@ local use = packer.use
   }
 
   -- Terminal
-  -- use {
-  --   'akinsho/toggleterm.nvim',
-  --   -- opt = true,
-  --   tag = 'v1.*'
-  -- }
+  use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'}
 
   -- Autocomplete
   use {
@@ -208,12 +204,26 @@ local use = packer.use
   }
 
   -- Scrollbar with search and errors
+  use {
+    "kevinhwang91/nvim-hlslens",
+    config = function()
+      -- require('hlslens').setup() is not required
+      require("scrollbar.handlers.search").setup({
+          nearest_float_when = 'never',
+      })
+    end,
+  }
   -- looks ugly. But has some use
   use {
     'petertriho/nvim-scrollbar',
     requires = {
-      'kevinhwang91/nvim-hlslens'
-    }
+      'kevinhwang91/nvim-hlslens',
+      'lewis6991/gitsigns.nvim'
+    },
+    -- after = {
+    --   'kevinhwang91/nvim-hlslens',
+    --   'lewis6991/gitsigns.nvim'
+    -- }
   }
 
   -- LSP status in statusline
@@ -262,10 +272,20 @@ local use = packer.use
     },
   }
 
+
+-- Open file with line number
+  use 'wsdjeg/vim-fetch'
+
+-- Fancy symbols
+  use {
+    'simrat39/symbols-outline.nvim',
+    config = function()
+      require("symbols-outline").setup()
+    end,
+  }
+
 -- Automatically set up your configuration after cloning packer.nvim
 -- Put this at the end after all plugins
 if packer_bootstrap then
   require('packer').sync()
 end
-
-

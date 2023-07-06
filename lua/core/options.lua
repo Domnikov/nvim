@@ -20,6 +20,9 @@ opt.timeoutlen = 500 -- shorter timeout for which-key
 -- Neovim UI
 -----------------------------------------------------------
 opt.number = true           -- Show line number
+opt.relativenumber = true   -- Show Relative numbers
+opt.cursorline = true       -- Highlight Cursor line
+opt.cursorlineopt= 'number' -- Hight onle number
 opt.showmatch = true        -- Highlight matching parenthesis
 opt.foldmethod = 'marker'   -- Enable folding (default 'foldmarker')
 -- opt.colorcolumn = '80'      -- Line lenght marker at 80 columns
@@ -60,7 +63,7 @@ opt.shortmess:append "sI"
 opt.wrap = false         -- No wrap text
 
 -- Build options options
-opt.makeprg = 'rm -rf ./build && cmake -B ./build -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -D DATACOLLECTION_LIB_PATH=\'/home/ivan/work/dcf-server/src/lib_data_collection/inc\' && cmake --build ./build -j8'
+opt.makeprg = [[make]]
 
 -- Mark tabs, dungling spaces and end of lines
 opt.listchars = { tab = '▶ ', trail = '·', extends = '↵', nbsp = '.' }
@@ -91,6 +94,10 @@ opt.swapfile = false
 -- use unix file format
 opt.fileformat = 'dos'
 opt.fileformats = {'dos','unix'}
+
+-- highlight options
+vim.cmd('hi LineNr guifg=Lime')
+vim.cmd('hi CursorLineNR guifg=Orange')
 -----------------------------------------------------------
 -- Ivan's options end
 -----------------------------------------------------------

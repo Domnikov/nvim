@@ -121,7 +121,7 @@ nvim_tree.setup {
   },
   filters = {
     dotfiles = false,
-    custom = {'.git', '.repo', '.cache', 'out', '*.xml', '*.tgz'},
+    custom = {'^\\.git', '^\\.repo', '^\\.cache', '.xml$', '.tgz$', '^out$', '^\\.pytest_cache'},
     exclude = {},
   },
   git = {
