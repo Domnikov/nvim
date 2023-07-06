@@ -9,7 +9,7 @@
 -- Autocompletion settings of "nvim-cmp" are defined in plugins/nvim-cmp.lua
 
 -- Enable for debugging
-vim.lsp.set_log_level("debug")
+-- vim.lsp.set_log_level("debug")
 
 local lsp_status_ok, lspconfig = pcall(require, 'lspconfig')
 if not lsp_status_ok then
@@ -86,39 +86,6 @@ local on_attach = function(client, bufnr)
 
   -- Enable completion triggered by <c-x><c-o>
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
-
---  local cmdify = require('helpers/misc').cmdify
---  require('which-key').register({
---    g = {
---      name = "Go to...",
---      D = { cmdify('lua vim.lsp.buf.declaration()'), "Declaration"},
---      d = { cmdify('lua vim.lsp.buf.definition()'), "Definition"},
---      h = { cmdify('lua vim.lsp.buf.hover()'), "Hover"},
---      i = { cmdify('lua vim.lsp.buf.implementation()'), "Implementation"},
---      T = { cmdify('lua vim.lsp.buf.type_definition()'), "Type definition"},
---      r = { cmdify('lua vim.lsp.buf.references()'), "References"},
---    },
---    ["<space>"] = {
---      c = {
---        name = "Code...",
---        a = { cmdify('lua vim.lsp.buf.code_action()'), "LSP code action"},
---        f = { cmdify('lua vim.lsp.buf.formatting()'), "LSP Format"},
---        r = {
---          name = "Refactor...",
---          r = { cmdify('lua vim.lsp.buf.rename()'), "Rename symbol" },
---        },
---      },
---      d = {
---        name = "Diagnostics...",
---        d = { cmdify('lua vim.diagnostic.open_float()'), "Line diagnostics"},
---        n = { cmdify('lua vim.lsp.diagnostic.goto_next()'), "Next"},
---        p = { cmdify('lua vim.lsp.diagnostic.goto_prev()'), "Previous"},
---        l = { cmdify('lua vim.diagnostic.setloclist()'), "Set loclist"},
---      },
---    },
---  }, {
---    buffer = bufnr
---  })
 end
 
 --[[
@@ -201,14 +168,9 @@ end
 require'lspconfig'.clangd.setup{
   cmd = { "clangd",
      "-j=10",
-     "--log=error", -- verbose
-     "-pretty",
+     "--pretty",
      "--background-index",
      "--clang-tidy",
-     "--completion-style=bundled",
-     "--header-insertion=never",
-     -- "--compile-commands-dir=.",
-     "--query-driver=/usr/lib/llvm-14/bin/clang"
    };
 }
 

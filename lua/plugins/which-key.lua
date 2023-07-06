@@ -32,7 +32,6 @@ wk.register({
       ), "Find Files"},
 
     b = {h.cmdify("Telescope buffers"), "Buffers"},
-    h = {h.cmdify("Telescope command_history"), "History"},
     f = {
       name = "Files...",
       f = {h.cmdify("Telescope find_files"), "File Browser"},
@@ -43,6 +42,7 @@ wk.register({
     c = {
       name = "Code...",
       s = {h.cmdify("Telescope lsp_document_symbols"), "Show All Symbols"};
+      S = {h.cmdify("SymbolsOutline"), "Open Symbols Panel"};
       i = {h.cmdify("lua vim.lsp.buf.hover()"), "Show Information"};
       l = {h.cmdify("Telescope colorscheme"), "Tags"};
       t = {h.cmdify("Telescope tags"), "Tags"};
@@ -85,10 +85,10 @@ wk.register({
       p = {h.cmdify('lua vim.lsp.diagnostic.goto_prev()'), "Previous"},
       l = {h.cmdify('lua vim.diagnostic.setloclist()'), "Set loclist"},
     },
-    t = {
-      name = "Terminal...",
-      t = {h.cmdify("ToggleTerm"), "Toggle Terminal"}
-    },
+    -- t = {
+    --   name = "Terminal...",
+    --   t = {h.cmdify("ToggleTerm"), "Toggle Terminal"}
+    -- },
     g = {
       name = "Git...",
       b = {h.cmdify('Git blame'), 'Blame File'},
@@ -97,9 +97,28 @@ wk.register({
       p = {h.cmdify('Gitsigns preview_hunk'), 'Preview Hunk'},
       s = {h.cmdify('Telescope git_status'), 'Status'}
     },
-    m = {
-      name = "Making...",
-      m = {"<cmd>opt.makeprg = 'build cpsfttest'", 'Cpsfttest'},
+    h = {
+      name = "HT Tools",
+      c = {h.cmdify(":term dhu-ht-clean"), 'Clean'},
+      e = {h.cmdify(":term error_menu"), 'Show Errors'},
+      M = {h.cmdify(":term dhu-ht-make"), 'Make'},
+    },
+    v = {
+      name = "VCC Tools",
+      M = {h.cmdify(":term dhu-vcc-make"), 'Make'},
+      e = {h.cmdify(":term error_menu"), 'Show Errors'},
+      i = {h.cmdify(":term dhu-vcc-ihu_make_no_clean"), 'Ihu Make QNX'},
+      I = {h.cmdify(":term dhu-vcc-ihu_make"), 'Ihu Make QNX With Clean'},
+      f = {h.cmdify(":term dhu-vcc-flash"), 'Flash'},
+      m = {h.cmdify(":term dhu-vcc-ut-and-make"), 'Ut and Make'},
+      d = {h.cmdify(":term dhu-vcc-moose_dl"), 'Download'},
+      u = {h.cmdify(":term dhu-vcc-ut"), 'Ut'},
+      t = {
+        name = "Testing...",
+        a = {h.cmdify(":term dhu-vcc-test-chimes-all"), 'Test All Chimes'},
+        e = {h.cmdify(":term dhu-vcc-test-chimes-ext"), 'Test Exterior Chimes'},
+        i = {h.cmdify(":term dhu-vcc-test-chimes-int"), 'Test Interior Chimes'},
+      },
     },
   }
 })

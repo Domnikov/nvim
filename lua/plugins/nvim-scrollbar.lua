@@ -1,8 +1,8 @@
-require('hlslens').setup({
-    calm_down = true,
-    nearest_only = true,
-    nearest_float_when = 'always'
-})
+-- require('hlslens').setup({
+--     calm_down = true,
+--     nearest_only = false,
+--     nearest_float_when = 'always'
+-- })
 
 require("scrollbar").setup({
     show = true,
@@ -87,8 +87,12 @@ require("scrollbar").setup({
         },
     },
     handlers = {
+        cursor = false,
         diagnostic = true,
-        search = true,
+        gitsigns = true, -- Requires gitsigns
+        handle = true,
+        search = true, -- Requires hlslens
+        ale = false, -- Requires ale
     },
 })
 
