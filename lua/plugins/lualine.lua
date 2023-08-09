@@ -18,13 +18,17 @@ require('lualine').setup {
         }
       }
     },
-    lualine_z = {
+    lualine_y = {
       {
-        'location',
+        'progress',
       },
       {
+        'location',
+      }
+    },
+    lualine_z = {
+      {
         'datetime',
-        -- options = "%H:%M",
         style = '%H:%M'
       }
     }
