@@ -17,6 +17,16 @@ require('lualine').setup {
           unnamed = '[No Name]', -- Text to show for unnamed buffers.
         }
       }
+    },
+    lualine_z = {
+      {
+        'location',
+      },
+      {
+        'datetime',
+        -- options = "%H:%M",
+        style = '%H:%M'
+      }
     }
   }
 }
