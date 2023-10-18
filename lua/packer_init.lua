@@ -284,6 +284,23 @@ local use = packer.use
     end,
   }
 
+-- Tests
+  use {
+    "nvim-neotest/neotest",
+    requires = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "antoinemadec/FixCursorHold.nvim"
+    },
+    -- require("neotest").setup({
+    --   adapters = {
+    --     require("neotest-gtest").setup({})
+    --   }
+    -- })
+  }
+
+  use {"alfaix/neotest-gtest"}
+
 -- Automatically set up your configuration after cloning packer.nvim
 -- Put this at the end after all plugins
 if packer_bootstrap then
