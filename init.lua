@@ -21,6 +21,7 @@ if not in_vscode() then
   require('plugins/nvim-scrollbar')
   require('plugins/nvim-ufo')
   require('plugins/nvim-dap')
+  require('plugins/neotest')
 end
 
 require('core/options')
