@@ -18,7 +18,7 @@ require("neotest").setup({
         "init.lua",
         "init.vim",
         "build",
-        ".git"
+        "cmake-build-ut"
       ),
 
       -- takes full path to the file and returns true if it's a test file, false otherwise
