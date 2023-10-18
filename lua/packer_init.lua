@@ -52,29 +52,11 @@ local use = packer.use
   -- Add you plugins here:
   use 'wbthomason/packer.nvim' -- packer can manage itself
 
-
-
   -- Speed up Nvim startup
   use 'lewis6991/impatient.nvim'
 
-  -- Indent line. Add vertical lines to show tabs
-  -- Removed by Ivan because it's bothiring him
-  --  use {
-  --    'lukas-reineke/indent-blankline.nvim',
-  --    after = 'nvim-treesitter'
-  --  }
-
   -- Comments. In visul mode <gc> for line and <gb> for block
   use 'numToStr/Comment.nvim'
-
-  -- Autopair
-  -- Removed by Ivan because it's bothiring him
-  --  use {
-  --    'windwp/nvim-autopairs',
-  --    config = function()
-  --      require('nvim-autopairs').setup()
-  --    end
-  --  }
 
   -- Icons
   use {
@@ -97,11 +79,6 @@ local use = packer.use
   -- Color schemes
   -- Ivan's
   use { 'Mofiqul/vscode.nvim', commit = "c5125820a0915ef50f03fae10423c43dc49c66b1" }
-  -- Markus's
-  --use {
-  --  'sainnhe/gruvbox-material'
-  --}
-  --use 'fenetikm/falcon'
 
   -- LSP
   use {
@@ -220,18 +197,11 @@ local use = packer.use
       'kevinhwang91/nvim-hlslens',
       'lewis6991/gitsigns.nvim'
     },
-    -- after = {
-    --   'kevinhwang91/nvim-hlslens',
-    --   'lewis6991/gitsigns.nvim'
-    -- }
   }
 
   -- LSP status in statusline
   -- Looks like doesn't work. Need additional check now to make it work
   use 'nvim-lua/lsp-status.nvim'
-
-  -- Remember last positioin (seems doesn't work)
-  --use 'https://git.sr.ht/~jhn/remember.nvim'
 
   -- Debugging
   use {
@@ -292,11 +262,6 @@ local use = packer.use
       "nvim-treesitter/nvim-treesitter",
       "antoinemadec/FixCursorHold.nvim"
     },
-    -- require("neotest").setup({
-    --   adapters = {
-    --     require("neotest-gtest").setup({})
-    --   }
-    -- })
   }
 
   use {"alfaix/neotest-gtest"}
