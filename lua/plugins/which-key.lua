@@ -31,6 +31,11 @@ wk.register({
       "layout_config={height=0.99, width=0.99}})"
       ), "Find Files"},
 
+    a = {
+      name = "AdventOfCode Tools",
+      t = {h.cmdify(":term [[ \"$PWD\" =~ \"AoC_202\" ]] && bash -c 'echo \"AoC detected\" && git add . && git commit --allow-empty -m \"TEST RUN: $(date)\" && rm -rf ./build && cmake -B ./build -DTEST= && cmake --build ./build && ./build/app' 2>&1 | tee /home/ivan/build.out || echo \"error: AoC ditectory is not detected\"; error_menu"), 'Test'},
+      r = {h.cmdify(":term [[ \"$PWD\" =~ \"AoC_202\" ]] && bash -c 'echo \"AoC detected\" && git add . && git commit --allow-empty -m \"REAL RUN: $(date)\" && rm -rf ./build && cmake -B ./build && cmake --build ./build && ./build/app' 2>&1 | tee /home/ivan/build.out || echo \"error: AoC ditectory is not detected\"; error_menu"), 'Run'},
+    },
     b = {h.cmdify("Telescope buffers"), "Buffers"},
     f = {
       name = "Files...",
