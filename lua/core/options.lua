@@ -92,8 +92,8 @@ vim.api.nvim_set_option("clipboard","unnamedplus")
 opt.swapfile = false
 
 -- use unix file format
-opt.fileformat = 'dos'
-opt.fileformats = {'dos','unix'}
+opt.fileformat = 'unix'
+opt.fileformats = {'unix'}
 
 -- highlight options
 vim.cmd('hi LineNr guifg=Lime')
