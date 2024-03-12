@@ -23,6 +23,20 @@ autocmd('BufWritePre', {
   command = ":%s/\\s\\+$//e"
 })
 
+-- Format using volvo commit-check
+augroup("AutoFormat", { clear = true })
+autocmd(
+    "BufWritePost",
+    {
+        pattern = {"*.hpp", "*.cpp", "*.h", "*.c", "*.cc", "*CMakeLists.txt", "*.cmake"},
+        group = "AutoFormat",
+        callback = function()
+            vim.cmd("silent !format-file '%'")
+            vim.cmd("edit")
+        end,
+    }
+)
+
 -- Don't auto commenting new lines
 autocmd('BufEnter', {
   pattern = '*',
@@ -37,16 +51,6 @@ autocmd('Filetype', {
   pattern = { 'text', 'markdown', 'html', 'xhtml', 'javascript', 'typescript' },
   command = 'setlocal cc=0'
 })
-
--- -- Set indentation to 2 spaces
--- augroup('setIndent', { clear = true })
--- autocmd('Filetype', {
---   group = 'setIndent',
---   pattern = { 'xml', 'html', 'xhtml', 'css', 'scss', 'javascript', 'typescript',
---     'yaml', 'lua'
---   },
---   command = 'setlocal shiftwidth=2 tabstop=2'
--- })
 
 -- Terminal settings:
 -- Open a Terminal on the right tab
@@ -69,16 +73,3 @@ autocmd('BufLeave', {
   pattern = 'term://*',
   command = 'stopinsert'
 })
-
--- -- Set indentation to 2 spaces
--- augroup('setIndent', { clear = true })
--- autocmd('Filetype', {
---   group = 'setIndent',
---   pattern = { 'xml', 'html', 'xhtml', 'css', 'scss', 'javascript', 'typescript',
---     'yaml', 'lua'
---   },
---   command = 'setlocal shiftwidth=2 tabstop=2'
--- })
-
--- Ivan's functions
--- autocmd('BufRead ,BufNewFile', {pattern = 'Taskfile', command = 'set filetype=yaml'})

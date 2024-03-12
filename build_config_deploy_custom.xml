@@ -28,22 +28,22 @@
 					<var description="Custom root directory for alternative LLVM built-in libs. Used by some SConscripts." intermediate="false" name="LLVMLIBPROP" value="/pkg/qct/software/llvm/release/arm/10.0.4/lib/clang/10.0.4/lib/linux-propri_rt"/>
 					<var description="GNU Make bin directory. Used by some tools/builders to wrap make support." intermediate="false" name="MAKE_PATH" value="/usr/bin/make"/>
 					<var description="PATH var used by system to find executables." intermediate="false" name="PATH" value="/usr/bin/make:/usr/bin:/pkg/qct/software/llvm/release/arm/10.0.4/bin:/pkg/gnu/make/3.81/bin:/pkg/qct/software/python/2.7/bin:/pkg/qct/software/llvm/release/arm/10.0.4/bin:/overrides:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/pkg/qct/qctss/linux/bin:."/>
-					<var description="Root dir for the 32-bit MUSL C standard library." intermediate="false" name="MUSL32PATH" value="/pkg/qct/software/llvm/release/arm/10.0.4/armv7-none-eabi/libc"/>
-					<var description="Directory containing custom executable utilities. Added to the system path at build time." intermediate="false" name="UTILROOT" value="/pkg"/>
+					<var description="Root directory for CLANG installation (within LLVM). Used by some SConscripts." intermediate="false" name="LLVMCLANG" value="/pkg/qct/software/llvm/release/arm/10.0.4/lib/clang/10.0.4"/>
+					<var description="The location of bin directory for code coverage tool. This is the apps dir for the path of bullseye." intermediate="false" name="CCBIN" value="/pkg/qct/software/bullseyecoverage/BullseyeCoverage-8.13.29/bin"/>
 					<var description="Bin directory for LLVM installation. Used by LLVM builder." intermediate="false" name="LLVMBIN" value="/pkg/qct/software/llvm/release/arm/10.0.4/bin"/>
 					<var description="Root directory of the LLVM installation." intermediate="false" name="LLVMROOT" value="/pkg/qct/software/llvm/release/arm/10.0.4"/>
 					<var description="64-bit LLVM/CLANG include path. Used by LLVM builder." intermediate="false" name="LLVMINC" value="/pkg/qct/software/llvm/release/arm/10.0.4/aarch64-none-elf/libc/include"/>
 					<var description="Name of code coverage tool." intermediate="false" name="CCTOOL" value="BullseyeCoverage-8.13.29"/>
 					<var description="Bin directory for any alternative Perl installation. Should be equivalent to CRMPERL if there is no alternative install. Usable by SConscripts/builders and added to the system path at build time." intermediate="false" name="PERLPATH" value="/usr/bin"/>
 					<var description="Root directory for LLVM built-in libs. Used by SConscripts with built-in dependencies." intermediate="false" name="LLVMLIB" value="/pkg/qct/software/llvm/release/arm/10.0.4/lib/clang/10.0.4/lib/linux"/>
+					<var description="Root dir for the 32-bit MUSL C standard library." intermediate="false" name="MUSL32PATH" value="/pkg/qct/software/llvm/release/arm/10.0.4/armv7-none-eabi/libc"/>
 					<var description="Location of the GCC toolchain. Used by LLVM builder on Windows." intermediate="false" name="GNUTOOL" value="/home/ivan/sources/volvocars-dhu/tools/qcom/llvm_toolchain/sd_llvm_arm_lnx_10.0.4/aarch64-linux-gnu"/>
 					<var description="Location of the 32-bit ARM linker. Used by LLVM builder." intermediate="false" name="GNUARM7" value="/prj/llvm-arm/home/common/build_tools/gcc-linaro-arm-linux-gnueabihf-4.8-2014.02_linux"/>
 					<var description="Current LLVM version. Used to determine compiler flag compatibility." intermediate="false" name="LLVM_VERSION" value="10.0.4"/>
 					<var description="Root directory for the system's GNU distribution. Used primarily by cygwin. May be implicitly referenced by other tools on Linux." intermediate="false" name="GNUPATH" value="/pkg/pkg/gnu/bin"/>
 					<var description="Location of the GNU C stdlib. Used primarily by LLVM builder on Windows. May be implicitly referenced by other tools on Linux." intermediate="false" name="GNULIBC" value="/home/ivan/sources/volvocars-dhu/tools/qcom/llvm_toolchain/sd_llvm_arm_lnx_10.0.4/aarch64-linux-gnu/libc"/>
 					<var description="Bin directory for the expected standard Perl installation. Added to the system path at build time." intermediate="false" name="CRMPERL" value="/usr/bin"/>
-					<var description="Root directory for CLANG installation (within LLVM). Used by some SConscripts." intermediate="false" name="LLVMCLANG" value="/pkg/qct/software/llvm/release/arm/10.0.4/lib/clang/10.0.4"/>
-					<var description="The location of bin directory for code coverage tool. This is the apps dir for the path of bullseye." intermediate="false" name="CCBIN" value="/pkg/qct/software/bullseyecoverage/BullseyeCoverage-8.13.29/bin"/>
+					<var description="Directory containing custom executable utilities. Added to the system path at build time." intermediate="false" name="UTILROOT" value="/pkg"/>
 					<var description="Root dir for the 64-bit MUSL C standard library." intermediate="false" name="MUSLPATH" value="/pkg/qct/software/llvm/release/arm/10.0.4/aarch64-none-elf/libc"/>
 					<var description="ARM compiler root directory. Used internally by the ARM compiler." intermediate="false" name="ARMHOME" value="/pkg/asw/compilers/arm/ADS1.2"/>
 					<var description="Bin directory for LLVM tools (eg elfcopy). Used by LLVM builder." intermediate="false" name="LLVMTOOLPATH" value="/pkg/qct/software/llvm/release/arm/10.0.4/tools/bin"/>
