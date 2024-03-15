@@ -28,11 +28,12 @@ augroup("AutoFormat", { clear = true })
 autocmd(
     "BufWritePost",
     {
-        pattern = {"*.hpp", "*.cpp", "*.h", "*.c", "*.cc", "*CMakeLists.txt", "*.cmake"},
+        pattern = {"*.hpp", "*.cpp", "*.h", "*.c", "*.cc"},
         group = "AutoFormat",
         callback = function()
             -- local orig_sum = vim.fn.system('md5sum '..vim.fn.expand('%').." | cut -d ' ' -f 1")
-            vim.cmd("silent !format-file '%'")
+            vim.cmd("silent !format-file-copyright '%'")
+            vim.cmd("silent !clang-format -i '%'")
             -- local new_sum = vim.fn.system('md5sum '..vim.fn.expand('%').." | cut -d ' ' -f 1")
             -- if( orig_sum == new_sum )
             -- then
@@ -41,6 +42,17 @@ autocmd(
                -- print("Checksums aren't equal: ",orig_sum," and ",new_sum)
                -- vim.cmd("edit")
             -- end
+        end,
+    }
+)
+autocmd(
+    "BufWritePost",
+    {
+        pattern = {"*CMakeLists.txt", "*.cmake"},
+        group = "AutoFormat",
+        callback = function()
+            vim.cmd("silent !format-file-copyright '%'")
+            vim.cmd("silent !cmake-format -i '%'")
         end,
     }
 )
