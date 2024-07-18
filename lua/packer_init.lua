@@ -223,7 +223,8 @@ local use = packer.use
   use {
     "rcarriga/nvim-dap-ui",
     requires = {
-      "mfussenegger/nvim-dap"
+      "mfussenegger/nvim-dap",
+      "nvim-neotest/nvim-nio"
     }
   }
   use {
@@ -265,6 +266,9 @@ local use = packer.use
   }
 
   use {"alfaix/neotest-gtest"}
+
+  -- Spotify
+  use {"stsewd/spotify.nvim"}
 
 -- Automatically set up your configuration after cloning packer.nvim
 -- Put this at the end after all plugins
