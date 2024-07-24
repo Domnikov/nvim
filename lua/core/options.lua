@@ -98,6 +98,9 @@ opt.fileformats = {'unix'}
 -- highlight options
 vim.cmd('hi LineNr guifg=Lime')
 vim.cmd('hi CursorLineNR guifg=Orange')
+
+-- Disable Ruby provider
+g.loaded_ruby_provider = 0
 -----------------------------------------------------------
 -- Ivan's options end
 -----------------------------------------------------------

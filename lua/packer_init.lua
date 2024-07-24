@@ -60,7 +60,9 @@ local use = packer.use
 
   -- Icons
   use {
-    'kyazdani42/nvim-web-devicons'
+    'kyazdani42/nvim-web-devicons',
+    requires = 'echasnovski/mini.nvim',
+    tag = 'nerd-v2-compat' -- For nerd fonts v2 compatibility
   }
 
   -- Tag viewer
@@ -177,7 +179,7 @@ local use = packer.use
     requires = {
       'kyazdani42/nvim-web-devicons', -- optional, for file icons
     },
-    tag = 'nightly' -- optional, updated every week. (see issue #1193)
+    -- tag = 'nightly' -- optional, updated every week. (see issue #1193)
   }
 
   -- Scrollbar with search and errors
