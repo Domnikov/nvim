@@ -9,7 +9,7 @@ require('vscode').setup({
     italic_comments = true,
 
     -- Disable nvim-tree background color
-    disable_nvimtree_bg = true,
+    -- disable_nvimtree_bg = true,
 
     -- Override colors (see ./lua/vscode/colors.lua)
     color_overrides = {

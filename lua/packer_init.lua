@@ -262,12 +262,11 @@ local use = packer.use
     "nvim-neotest/neotest",
     requires = {
       "nvim-lua/plenary.nvim",
+      "alfaix/neotest-gtest",
       "nvim-treesitter/nvim-treesitter",
       "antoinemadec/FixCursorHold.nvim"
     },
   }
-
-  use {"alfaix/neotest-gtest"}
 
   -- Spotify
   use {"stsewd/spotify.nvim"}
