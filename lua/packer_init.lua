@@ -182,6 +182,9 @@ local use = packer.use
     -- tag = 'nightly' -- optional, updated every week. (see issue #1193)
   }
 
+  -- Cmake features
+  use 'Civitasv/cmake-tools.nvim'
+
   -- Scrollbar with search and errors
   use {
     "kevinhwang91/nvim-hlslens",

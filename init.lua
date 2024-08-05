@@ -20,8 +20,9 @@ if not in_vscode() then
   require('plugins/nvim-tree')
   require('plugins/nvim-scrollbar')
   require('plugins/nvim-ufo')
-  require('plugins/nvim-dap')
-  require('plugins/neotest')
+  -- require('plugins/nvim-dap')
+  -- require('plugins/neotest')
+  -- require('plugins/cmake-tools')
 end
 
 require('core/options')
