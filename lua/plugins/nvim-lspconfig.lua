@@ -24,19 +24,19 @@ end
 -- Replace some simbols
 vim.fn.sign_define(
   "DiagnosticSignError",
-  { texthl = "DiagnosticSignError", text = "⛔", numhl = "DiagnosticSignError" }
+  { texthl = "DiagnosticSignError", text = "", numhl = "DiagnosticSignError" }
 )
 vim.fn.sign_define(
   "DiagnosticSignWarning",
-  { texthl = "DiagnosticSignWarning", text = "🟡", numhl = "DiagnosticSignWarning" }
+  { texthl = "DiagnosticSignWarning", text = "", numhl = "DiagnosticSignWarning" }
 )
 vim.fn.sign_define(
   "DiagnosticSignHint",
-  { texthl = "DiagnosticSignHint", text = "💡", numhl = "DiagnosticSignHint" }
+  { texthl = "DiagnosticSignHint", text = "", numhl = "DiagnosticSignHint" }
 )
 vim.fn.sign_define(
   "DiagnosticSignInformation",
-  { texthl = "DiagnosticSignInformation", text = "🟢", numhl = "DiagnosticSignInformation" }
+  { texthl = "DiagnosticSignInformation", text = "", numhl = "DiagnosticSignInformation" }
 )
 
 -- Diagnostic options, see: `:help vim.diagnostic.config`

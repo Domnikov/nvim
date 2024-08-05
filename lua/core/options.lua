@@ -101,6 +101,9 @@ vim.cmd('hi CursorLineNR guifg=Orange')
 
 -- Disable Ruby provider
 g.loaded_ruby_provider = 0
+
+-- Terminal scroll size
+opt.scrollback = 100000
 -----------------------------------------------------------
 -- Ivan's options end
 -----------------------------------------------------------
