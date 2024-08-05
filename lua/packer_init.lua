@@ -62,7 +62,7 @@ local use = packer.use
   use {
     'kyazdani42/nvim-web-devicons',
     requires = 'echasnovski/mini.nvim',
-    tag = 'nerd-v2-compat' -- For nerd fonts v2 compatibility
+    -- tag = 'nerd-v2-compat' -- For nerd fonts v2 compatibility
   }
 
   -- Tag viewer
