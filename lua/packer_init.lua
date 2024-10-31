@@ -271,38 +271,48 @@ local use = packer.use
     },
   }
 
-  -- Spotify
-  use {"stsewd/spotify.nvim",
-    requires = {
-      "rcarriga/nvim-notify"
-    },
+  -- Nice notifications in popup windows
+  use {
+    "rcarriga/nvim-notify",
     config = function()
       require("notify").setup({
         background_colour = "#000000",
       })
-      vim.notify = require("notify")
-      vim.g.spotify_template = {
-         {
-            {
-                template = "  {shuffle_symbol}",
-                align = "center",
-            },
-            {
-                template = "{time} / {length}",
-                align = "center",
-            },
-            {
-                template = "{volume_symbol} {volume}%  ",
-                align = "center",
-            }
-         },
-         {
-             template = "{status_symbol} {progress_bar} ",
-             align = "center",
-         }
-    }
     end,
   }
+
+  -- -- Spotify replaced by using playerctl
+  -- use {"stsewd/spotify.nvim",
+  --   requires = {
+  --     "rcarriga/nvim-notify"
+  --   },
+  --   config = function()
+  --     require("notify").setup({
+  --       background_colour = "#000000",
+  --     })
+  --     vim.notify = require("notify")
+  --     vim.g.spotify_template = {
+  --        {
+  --           {
+  --               template = "  {shuffle_symbol}",
+  --               align = "center",
+  --           },
+  --           {
+  --               template = "{time} / {length}",
+  --               align = "center",
+  --           },
+  --           {
+  --               template = "{volume_symbol} {volume}%  ",
+  --               align = "center",
+  --           }
+  --        },
+  --        {
+  --            template = "{status_symbol} {progress_bar} ",
+  --            align = "center",
+  --        }
+  --   }
+  --   end,
+  -- }
 
   -- -- Markdown
   -- use {'iamcco/markdown-preview.nvim'}
