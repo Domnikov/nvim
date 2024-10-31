@@ -7,6 +7,52 @@ function termcodes(str)
   return vim.api.nvim_replace_termcodes(str, true, true,true)
 end
 
+function is_vcc_dhu()
+  local template = "/home/ivan/sources/volvocars-dhu"
+  local path = string.sub(vim.fn.getcwd(), 0, string.len(template))
+  return path == template
+end
+
+function is_ht_dhu()
+  local template = "/home/ivan/sources/haleytek-dhu"
+  local path = string.sub(vim.fn.getcwd(), 0, string.len(template))
+  return path == template
+end
+
+function is_vcc_uxc()
+  local template = "/home/ivan/sources/volvocars-uxc"
+  local path = string.sub(vim.fn.getcwd(), 0, string.len(template))
+  return path == template
+end
+
+function is_vcc_any()
+  return is_vcc_dhu() or is_vcc_uxc()
+end
+
+function is_ht_any()
+  return is_ht_dhu() or is_ht_uxc()
+end
+
+function is_ht_uxc()
+  local template = "/home/ivan/sources/haleytek-uxc"
+  local path = string.sub(vim.fn.getcwd(), 0, string.len(template))
+  return path == template
+end
+
+function is_work_source()
+  return is_vcc_any() or is_ht_any()
+end
+
+function is_aoc_source()
+  local template = "/home/ivan/sources/advent_of_code"
+  local path = string.sub(vim.fn.getcwd(), 0, string.len(template))
+  return path == template
+end
+
+function is_any_source()
+  return is_work_source() or is_aoc_source()
+end
+
 wk.add({
   { "<space><space>", "<cmd> :lua require('telescope.builtin').find_files({search_dirs={'disabled_android','.','disabled_tools'}, layout_config={height=0.99, width=0.99}})<cr>", desc = "Find Files" },
   { "<space>D", group = "Diagnostics..." },
@@ -14,9 +60,6 @@ wk.add({
   { "<space>Dl", "<cmd>lua vim.diagnostic.setloclist()<cr>", desc = "Set loclist" },
   { "<space>Dn", "<cmd>lua vim.lsp.diagnostic.goto_next()<cr>", desc = "Next" },
   { "<space>Dp", "<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>", desc = "Previous" },
-  { "<space>a", group = "AdventOfCode Tools..." },
-  { "<space>ar", "<cmd>:term [[ \"$PWD\" =~ \"AoC_202\" ]] && bash -c 'echo \"AoC detected\" && git add . && git commit --allow-empty -m \"REAL RUN: $(date)\" && rm -rf ./build && cmake -B ./build && cmake --build ./build && ./build/app' 2>&1 | tee /home/ivan/build.out || echo \"error: AoC ditectory is not detected\"; error_menu ~/build.out <cr>", desc = "Run" },
-  { "<space>at", "<cmd>:term [[ \"$PWD\" =~ \"AoC_202\" ]] && bash -c 'echo \"AoC detected\" && git add . && git commit --allow-empty -m \"TEST RUN: $(date)\" && rm -rf ./build && cmake -B ./build -DTEST= && cmake --build ./build && ./build/app' 2>&1 | tee /home/ivan/build.out || echo \"error: AoC ditectory is not detected\"; error_menu ~/build.out <cr>", desc = "Test" },
   { "<space>b", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
   { "<space>c", group = "Code..." },
   { "<space>cS", "<cmd>SymbolsOutline<cr>", desc = "Open Symbols Panel" },
@@ -62,38 +105,31 @@ wk.add({
   { "<space>gl", "<cmd>Gitsigns blame_line<cr>", desc = "Blame Line" },
   { "<space>gp", "<cmd>Gitsigns preview_hunk<cr>", desc = "Preview Hunk" },
   { "<space>gs", "<cmd>Telescope git_status<cr>", desc = "Status" },
-  { "<space>h", group = "HT Tools..." },
-  { "<space>hM", "<cmd>:term dhu-ht-make<cr>", desc = "Make" },
-  { "<space>hc", "<cmd>:term dhu-ht-clean<cr>", desc = "Clean" },
-  { "<space>he", "<cmd>:term error_menu ~/build.out <cr>", desc = "Show Errors" },
-  { "<space>s", group = "Spotify..." },
-  { "<space>sp", "<cmd>Spotify play/pause<cr>", desc = "Play/Pause" },
-  { "<space>ss", "<cmd>Spotify stop<cr>", desc = "Stop" },
-  { "<space>sn", "<cmd>Spotify next<cr>", desc = "Next" },
-  { "<space>sb", "<cmd>Spotify prev<cr>", desc = "Before" },
-  { "<space>sw", "<cmd>Spotify show<cr>", desc = "Show" },
-  { "<space>sh", group = "Spotify Shuffle..." },
-  { "<space>shn", "<cmd>Spotify shuffle on<cr>", desc = "Shuffle On" },
-  { "<space>shf", "<cmd>Spotify shuffle off<cr>", desc = "Shuffle Off" },
-  { "<space>v", group = "VCC Tools..." },
-  { "<space>vF", "<cmd>:term dhu-vcc-flash_all<cr>", desc = "Flash ALL" },
-  { "<space>vI", "<cmd>:term dhu-vcc-ihu_make_clean<cr>", desc = "Ihu Make QNX With Clean" },
-  { "<space>vM", "<cmd>:term dhu-vcc-make<cr>", desc = "Make" },
-  { "<space>vU", "<cmd>:term dhu-vcc-ut_sequence<cr>", desc = "Unit Tests in Sequence" },
-  { "<space>vd", "<cmd>:term dhu-vcc-moose_dl<cr>", desc = "Download" },
-  { "<space>ve", "<cmd>:term error_menu ~/build.out<cr>", desc = "Show Errors" },
-  { "<space>vf", "<cmd>:term dhu-vcc-flash<cr>", desc = "Flash QNX" },
-  { "<space>vi", "<cmd>:term dhu-vcc-ihu_make<cr>", desc = "Ihu Make QNX" },
-  { "<space>vm", "<cmd>:term dhu-vcc-ut-and-make<cr>", desc = "Ut and Make" },
-  { "<space>vt", group = "Testing..." },
-  { "<space>vta", "<cmd>:term dhu-vcc-test-chimes-all<cr>", desc = "Test All Chimes" },
-  { "<space>vte", "<cmd>:term dhu-vcc-test-chimes-ext<cr>", desc = "Test Exterior Chimes" },
-  { "<space>vti", "<cmd>:term dhu-vcc-test-chimes-int<cr>", desc = "Test Interior Chimes" },
-  { "<space>vu", "<cmd>:term dhu-vcc-ut<cr>", desc = "Unit Tests" },
-  { "<space>u", group = "UXC VCC GAP Tools..." },
-  { "<space>um", "<cmd>:term dhu-gpa-make<cr>", desc = "GPA Make" },
-  { "<space>uu", "<cmd>:term dhu-gpa-ut<cr>", desc = "GPA Unit Test" },
-  { "<space>ue", "<cmd>:term error_menu ~/sources/haleytek-gpa/qnx/apps/qnx_ap/cvendor/build-qnx/build.out<cr>", desc = "Show Errors" },
+  { "<space>p", group = "Player..." },
+  { "<space>pp", "<cmd>Player play/pause<cr>", desc = "Play/Pause" },
+  { "<space>ps", "<cmd>Player stop<cr>", desc = "Stop" },
+  { "<space>pn", "<cmd>Player next<cr>", desc = "Next" },
+  { "<space>pb", "<cmd>Player prev<cr>", desc = "Before" },
+  { "<space>pw", "<cmd>Player show<cr>", desc = "Show" },
+  { "<space>ph", group = "Player Shuffle..." },
+  { "<space>phn", "<cmd>Player shuffle on<cr>", desc = "Shuffle On" },
+  { "<space>phf", "<cmd>Player shuffle off<cr>", desc = "Shuffle Off" },
+  { "<space>v", group = "Vendor Source Code Tools...", cond = is_any_source},
+  { "<space>vF", "<cmd>:term compile_command_selector flash_all<cr>", desc = "Flash ALL", cond = is_vcc_dhu },
+  { "<space>vI", "<cmd>:term compile_command_selector ihu_make_clean<cr>", desc = "Ihu Make QNX With Clean", cond = is_vcc_any},
+  { "<space>vd", "<cmd>:term compile_command_selector moose_dl<cr>", desc = "Download", cond = is_vcc_any},
+  { "<space>vc", "<cmd>:term compile_command_selector clean<cr>", desc = "Clean", cond = is_ht_dhu},
+  { "<space>ve", "<cmd>:term error_menu ~/build.out<cr>", desc = "Show Errors", cond = is_any_source},
+  { "<space>vf", "<cmd>:term compile_command_selector flash<cr>", desc = "Flash QNX", cond = is_vcc_dhu},
+  { "<space>vi", "<cmd>:term compile_command_selector ihu_make<cr>", desc = "Ihu Make QNX", cond = is_vcc_any},
+  { "<space>vm", "<cmd>:term compile_command_selector make<cr>", desc = "Make", cond = is_work_source},
+  { "<space>vt", group = "Testing...", cond = is_vcc_dhu},
+  { "<space>vta", "<cmd>:term compile_command_selector test-chimes-all<cr>", desc = "Test All Chimes", cond = is_vcc_dhu},
+  { "<space>vte", "<cmd>:term compile_command_selector test-chimes-ext<cr>", desc = "Test Exterior Chimes", cond = is_vcc_dhu},
+  { "<space>vti", "<cmd>:term compile_command_selector test-chimes-int<cr>", desc = "Test Interior Chimes", cond = is_vcc_dhu},
+  { "<space>vu", "<cmd>:term compile_command_selector ut<cr>", desc = "Unit Tests", cond = is_work_source},
+  { "<space>vm", "<cmd>:term [[ \"$PWD\" =~ \"advent_of_code/202\" ]] && bash -c 'echo \"AoC detected\" && git add . && git commit --allow-empty -m \"REAL RUN: $(date)\" && rm -rf ./build && cmake -B ./build && cmake --build ./build && ./build/app' 2>&1 | tee /home/ivan/build.out || echo \"error: AoC ditectory is not detected\"; error_menu ~/build.out <cr>", desc = "Run", cond = is_aoc_source},
+  { "<space>vu", "<cmd>:term [[ \"$PWD\" =~ \"advent_of_code/202\" ]] && bash -c 'echo \"AoC detected\" && git add . && git commit --allow-empty -m \"TEST RUN: $(date)\" && rm -rf ./build && cmake -B ./build -DTEST= && cmake --build ./build && ./build/app' 2>&1 | tee /home/ivan/build.out || echo \"error: AoC ditectory is not detected\"; error_menu ~/build.out <cr>", desc = "Test", cond = is_aoc_source},
   { "g", group = "Go to..." },
   { "gD", "<cmd>lua vim.lsp.buf.definition()<cr>", desc = "Goto Defenition" },
   { "gT", "<cmd>lua vim.lsp.buf.type_definition()<cr>", desc = "Type definition" },
