@@ -36,7 +36,7 @@ local ll = require('lualine')
 
 local function print_mode()
   local mode = vim.api.nvim_get_mode()["mode"]
-  if mode == "n" then
+  if mode == "n" or mode == "nt" then
     return "N"
     -- return ""
   elseif mode == "i" then
