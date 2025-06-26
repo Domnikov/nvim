@@ -1,33 +1,37 @@
+local function get_cast_status()
+  local content
+  local filename = "/tmp/pactl_status"
+  local file = io.open(filename, "r")  -- open the file in read mode
+  if file then
+    content = file:read("*a")  -- read the whole file content
+    file:close()
+  end
+  return content
+end
+
 local function print_player_status()
   local width = vim.o.columns
+  local cast_status = get_cast_status()
   if width <= 100 then
     return ""
   else
-    local ssh_client = os.getenv("SSH_CLIENT")
-    if ssh_client then
-      -- return "󰰡󰰡󰰀"
-      return ""
-    else
-      local command = "playerctl status -a 2>/dev/null"
-      local handle = io.popen(command)
-      local read = handle:read("*a")
-      handle:close()
-      if string.find(read, "Playing") then
-        --   ⠁ ⠂ ⠃ ⠄ ⠅ ⠆ ⠇ ⠈ ⠉ ⠊ ⠋ ⠌ ⠍ ⠎ ⠏ ⠐ ⠑ ⠒ ⠓ ⠔ ⠕ ⠖ ⠗ ⠘ ⠙ ⠚ ⠛ ⠜ ⠝ ⠞ ⠟ ⠠ ⠡ ⠢ ⠣ ⠤ ⠥ ⠦ ⠧ ⠨ ⠩ ⠪ ⠫ ⠬ ⠭ ⠮ ⠯ ⠰ ⠱ ⠲ ⠳ ⠴ ⠵ ⠶ ⠷ ⠸ ⠹ ⠺ ⠻ ⠼ ⠽ ⠾ ⠿
-
-        -- ⡀ ⡁ ⡂ ⡃ ⡄ ⡅ ⡆ ⡇ ⡈ ⡉ ⡊ ⡋ ⡌ ⡍ ⡎ ⡏ ⡐ ⡑ ⡒ ⡓ ⡔ ⡕ ⡖ ⡗ ⡘ ⡙ ⡚ ⡛ ⡜ ⡝ ⡞ ⡟ ⡠ ⡡ ⡢ ⡣ ⡤ ⡥ ⡦ ⡧ ⡨ ⡩ ⡪ ⡫ ⡬ ⡭ ⡮ ⡯ ⡰ ⡱ ⡲ ⡳ ⡴ ⡵ ⡶ ⡷ ⡸ ⡹ ⡺ ⡻ ⡼ ⡽ ⡾ ⡿
-
-        -- ⢀ ⢁ ⢂ ⢃ ⢄ ⢅ ⢆ ⢇ ⢈ ⢉ ⢊ ⢋ ⢌ ⢍ ⢎ ⢏ ⢐ ⢑ ⢒ ⢓ ⢔ ⢕ ⢖ ⢗ ⢘ ⢙ ⢚ ⢛ ⢜ ⢝ ⢞ ⢟ ⢠ ⢡ ⢢ ⢣ ⢤ ⢥ ⢦ ⢧ ⢨ ⢩ ⢪ ⢫ ⢬ ⢭ ⢮ ⢯ ⢰ ⢱ ⢲ ⢳ ⢴ ⢵ ⢶ ⢷ ⢸ ⢹ ⢺ ⢻ ⢼ ⢽ ⢾ ⢿
-
-        -- ⣀ ⣁ ⣂ ⣃ ⣄ ⣅ ⣆ ⣇ ⣈ ⣉ ⣊ ⣋ ⣌ ⣍ ⣎ ⣏ ⣐ ⣑ ⣒ ⣓ ⣔ ⣕ ⣖ ⣗ ⣘ ⣙ ⣚ ⣛ ⣜ ⣝ ⣞ ⣟ ⣠ ⣡ ⣢ ⣣ ⣤ ⣥ ⣦ ⣧ ⣨ ⣩ ⣪ ⣫ ⣬ ⣭ ⣮ ⣯ ⣰ ⣱ ⣲ ⣳ ⣴ ⣵ ⣶ ⣷ ⣸ ⣹ ⣺ ⣻ ⣼ ⣽ ⣾ ⣿
-        -- local characters = {'⣀', '⣁', '⣂', '⣄', '⣅', '⣆', '⣇', '⣏', '⣗', '⣧','⣯', '⣷', '⣿'}
-        -- local characters = {"⢁", "⠢", "⠔", "⡈"}
-        local characters = {"⠸⡆", "⠱⢆", "⠲⠦", "⠴⠖", "⡰⠎", "⢰⠇"}
-        local animation = os.time() % table.getn(characters)
-        return "" .. characters[animation+1]
-      end
-      return "  "
+    local command = "playerctl status -a 2>/dev/null"
+    local handle = io.popen(command)
+    local read = handle:read("*a")
+    handle:close()
+    if string.find(read, "Playing") then
+      -- local characters = {'⣀', '⣁', '⣂', '⣄', '⣅', '⣆', '⣇', '⣏', '⣗', '⣧','⣯', '⣷', '⣿'}
+      -- local characters = {"⢁", "⠢", "⠔", "⡈"}
+      local characters = {"⠸⡆", "⠱⢆", "⠲⠦", "⠴⠖", "⡰⠎", "⢰⠇"}
+      local animation = os.time() % table.getn(characters)
+      return cast_status .. "" .. characters[animation+1]
     end
+      if cast_status == nil or cast_status == "" then
+        return "  "
+      end
+      local characters = {"⠸⡆", "⠱⢆", "⠲⠦", "⠴⠖", "⡰⠎", "⢰⠇"}
+      local animation = os.time() % table.getn(characters)
+      return cast_status .. characters[animation+1]
   end
 end
 
