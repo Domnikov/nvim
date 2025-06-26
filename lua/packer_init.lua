@@ -328,6 +328,29 @@ use { 'jackMort/ChatGPT.nvim',      -- ChatGPT for Neovim (GPT interaction)
   },
 }
 
+use {
+  "yetone/avante.nvim",
+  run = "make",
+  dependencies = {
+    "nvim-lua/plenary.nvim",
+    "MunifTanjim/nui.nvim",
+    "nvim-tree/nvim-web-devicons",
+    "stevearc/dressing.nvim",
+    { "MeanderingProgrammer/render-markdown.nvim", ft = { "markdown", "Avante" } }
+  },
+  config = function()
+    require("avante").setup({
+      provider = "copilot",
+      providers = {
+        copilot = {
+          -- Your Copilot-specific config goes here (if any)
+          -- For example, you can set your own keymaps or enable/disable features
+        }
+      }
+    })
+  end
+}
+
 -- Automatically set up your configuration after cloning packer.nvim
 -- Put this at the end after all plugins
 if packer_bootstrap then
