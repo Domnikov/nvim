@@ -76,12 +76,12 @@ g.loaded_perl_provider = 0
 g.clipboard = {
     name = 'myClipboard',
     copy = {
-        ["+"] = {'my_vim_copy.sh'},
-        ["*"] = {'my_vim_copy.sh'},
+        ["+"] = {'/home/ivan/local/bin/my_vim_copy.sh'},
+        ["*"] = {'/home/ivan/local/bin/my_vim_copy.sh'},
     },
     paste = {
-        ["+"] = {'my_vim_paste.sh'},
-        ["*"] = {'my_vim_paste.sh'},
+        ["+"] = {'/home/ivan/local/bin/my_vim_paste.sh'},
+        ["*"] = {'/home/ivan/local/bin/my_vim_paste.sh'},
     },
     cache_enabled = 1,
 }
