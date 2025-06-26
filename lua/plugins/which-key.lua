@@ -91,6 +91,9 @@ end
 
 wk.add({
   { "<space><space>", "<cmd> :lua require('telescope.builtin').find_files({search_dirs={'disabled_android','.','disabled_tools'}, layout_config={height=0.99, width=0.99}})<cr>", desc = "Find Files" },
+  { "<space>a", group = "Avante..." },
+  { "<space>aa", "<cmd>AvanteToggle<cr>", desc = "Open/Close Avante Chat" },
+  { "<space>ar", "<cmd>AvanteClear<cr>", desc = "Reset Avante Chat" },
   { "<space>D", group = "Diagnostics..." },
   { "<space>Dd", "<cmd>lua vim.diagnostic.open_float()<cr>", desc = "Line diagnostics" },
   { "<space>Dl", "<cmd>lua vim.diagnostic.setloclist()<cr>", desc = "Set loclist" },
