@@ -317,6 +317,17 @@ local use = packer.use
   -- -- Markdown
   -- use {'iamcco/markdown-preview.nvim'}
   --
+
+-- All AI related plugins
+use 'github/copilot.vim'            -- GitHub Copilot for Neovim
+use 'neoclide/coc.nvim'             -- For GPT completions and interactions
+use { 'jackMort/ChatGPT.nvim',      -- ChatGPT for Neovim (GPT interaction)
+  requires = {
+    'MunifTanjim/nui.nvim', -- required for UI components
+    'nvim-lua/plenary.nvim', -- required for async operations
+  },
+}
+
 -- Automatically set up your configuration after cloning packer.nvim
 -- Put this at the end after all plugins
 if packer_bootstrap then
