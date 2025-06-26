@@ -57,6 +57,38 @@ function is_any_source()
   return is_work_source() or is_aoc_source()
 end
 
+function toggle_copilot()
+  local is_enabled = false
+
+  -- Temporarily capture messages
+  local output = {}
+  local function on_output(_, msg, _)
+    table.insert(output, msg)
+    return true
+  end
+
+  vim.api.nvim_exec2("Copilot status", { output = true })
+  vim.cmd("redir => g:copilot_status_output")
+  vim.cmd("silent Copilot status")
+  vim.cmd("redir END")
+
+  local status_lines = vim.split(vim.g.copilot_status_output or "", "\n")
+  for _, line in ipairs(status_lines) do
+    if line:match("Ready") then
+      is_enabled = true
+      break
+    end
+  end
+
+  if is_enabled then
+    vim.cmd("Copilot disable")
+    vim.notify("Copilot Disabled", vim.log.levels.INFO)
+  else
+    vim.cmd("Copilot enable")
+    vim.notify("Copilot Enabled", vim.log.levels.INFO)
+  end
+end
+
 wk.add({
   { "<space><space>", "<cmd> :lua require('telescope.builtin').find_files({search_dirs={'disabled_android','.','disabled_tools'}, layout_config={height=0.99, width=0.99}})<cr>", desc = "Find Files" },
   { "<space>D", group = "Diagnostics..." },
@@ -77,11 +109,10 @@ wk.add({
   { "<space>ct", "<cmd>Telescope tags<cr>", desc = "Tags" },
   { "<space>cu", "<cmd>Trouble lsp_references<cr>", desc = "Show Usage" },
   { "<space>cc", group = "Copilot...", icon = "" },
-  { "<space>cce", "<cmd>Copilot enable<CR>", desc = "Enable Copilot" },
-  { "<space>ccd", "<cmd>Copilot disable<CR>", desc = "Disable Copilot" },
-  -- { "<space>ccc", "<cmd>Copilot toggle<CR>", desc = "Toggle Copilot on/off" },
+  { "<space>ccc", toggle_copilot, desc = "Toggle Copilot on/off" },
   { "<space>cca", "<cmd>Copilot accept<CR>", desc = "Accept Copilot Suggestion" },
   { "<space>ccn", "<cmd>Copilot next<CR>", desc = "Next Copilot Suggestion" },
+  { "<space>ccp", "<cmd>Copilot prev<CR>", desc = "Previous Copilot Suggestion" },
   { "<space>ccp", "<cmd>Copilot prev<CR>", desc = "Previous Copilot Suggestion" },
   { "<space>d", group = "Debug..." },
   { "<space>dC", "<cmd>lua require'dap'.set_breakpoint(vim.fn.input '[Condition] > ')<cr>", desc = "Conditional Breakpoint" },
