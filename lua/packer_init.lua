@@ -34,6 +34,8 @@ vim.cmd [[
   augroup end
 ]]
 
+-- For avante seatch. Delete if no need
+-- pcall(require, "luarocks.loader")
 
 -- Use a protected call so we don't error out on first use
 local status_ok, packer = pcall(require, 'packer')
@@ -42,6 +44,9 @@ if not status_ok then
 end
 packer.init({
   compile_on_sync = true,
+  git = {
+    depth = 1, -- Only get latest commit
+  },
   display = {
     open_fn = require('packer.util').float
   }
@@ -61,8 +66,7 @@ local use = packer.use
   -- Icons
   use {
     'kyazdani42/nvim-web-devicons',
-    requires = 'echasnovski/mini.nvim',
-    -- tag = 'nerd-v2-compat' -- For nerd fonts v2 compatibility
+    requires = 'echasnovski/mini.nvim'
   }
 
   -- Tag viewer
@@ -80,7 +84,7 @@ local use = packer.use
 
   -- Color schemes
   -- Ivan's
-  use { 'Mofiqul/vscode.nvim', commit = "c5125820a0915ef50f03fae10423c43dc49c66b1" }
+  use {'Mofiqul/vscode.nvim', commit = "c5125820a0915ef50f03fae10423c43dc49c66b1" }
 
   -- LSP
   use {
@@ -89,7 +93,7 @@ local use = packer.use
     -- opt = true
   }
 
-  use {
+  use { --Stopped working after disabling nvim-cmp
     'hrsh7th/cmp-nvim-lsp',
     after = { "nvim-lspconfig" }
   }
@@ -99,10 +103,10 @@ local use = packer.use
     after = { "nvim-lspconfig" }
   }
 
-  -- Terminal
-  use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'}
+  -- Make Neovim's fold look modern and keep high performance
+  -- use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'}
 
-  -- Autocomplete
+  -- Autocomplete. Replace with COC
   use {
     'hrsh7th/nvim-cmp',
     requires = {
@@ -115,7 +119,7 @@ local use = packer.use
     -- opt = true
   }
 
-  -- Code Style
+  -- Automatically adjusts 'shiftwidth' and 'expandtab' based on the current file
   use 'tpope/vim-sleuth'
 
   -- Statusline
@@ -156,8 +160,8 @@ local use = packer.use
   }
 
   -- surround
-  use 'tpope/vim-surround'
-  use 'tpope/vim-repeat'
+  -- use 'tpope/vim-surround' -- Enbale back if doesn't work commends to change inside "", '', () and etc
+  -- use 'tpope/vim-repeat' -- Repeat last command in some smart way instead of pressing '.' all the time
 
   -- Ivan
   -- Show various informatin each line
@@ -260,7 +264,7 @@ local use = packer.use
     end,
   }
 
--- Tests
+-- Tests. Need to configure better
   use {
     "nvim-neotest/neotest",
     requires = {
@@ -281,46 +285,15 @@ local use = packer.use
     end,
   }
 
-  -- -- Spotify replaced by using playerctl
-  -- use {"stsewd/spotify.nvim",
-  --   requires = {
-  --     "rcarriga/nvim-notify"
-  --   },
-  --   config = function()
-  --     require("notify").setup({
-  --       background_colour = "#000000",
-  --     })
-  --     vim.notify = require("notify")
-  --     vim.g.spotify_template = {
-  --        {
-  --           {
-  --               template = "  {shuffle_symbol}",
-  --               align = "center",
-  --           },
-  --           {
-  --               template = "{time} / {length}",
-  --               align = "center",
-  --           },
-  --           {
-  --               template = "{volume_symbol} {volume}%  ",
-  --               align = "center",
-  --           }
-  --        },
-  --        {
-  --            template = "{status_symbol} {progress_bar} ",
-  --            align = "center",
-  --        }
-  --   }
-  --   end,
-  -- }
-
-  -- -- Markdown
-  -- use {'iamcco/markdown-preview.nvim'}
-  --
-
 -- All AI related plugins
 use 'github/copilot.vim'            -- GitHub Copilot for Neovim
-use 'neoclide/coc.nvim'             -- For GPT completions and interactions
+
+use({
+  'neoclide/coc.nvim', -- For GPT completions and interactions
+  branch = 'release',
+  run = 'npm ci --legacy-peer-deps',
+})
+
 use { 'jackMort/ChatGPT.nvim',      -- ChatGPT for Neovim (GPT interaction)
   requires = {
     'MunifTanjim/nui.nvim', -- required for UI components
@@ -330,7 +303,8 @@ use { 'jackMort/ChatGPT.nvim',      -- ChatGPT for Neovim (GPT interaction)
 
 use {
   "yetone/avante.nvim",
-  run = "make",
+  -- rocks = {"luasec"}, -- luarocks doesn't work :(
+  run = "make BUILD_FROM_SOURCE=true",
   dependencies = {
     "nvim-lua/plenary.nvim",
     "MunifTanjim/nui.nvim",
@@ -340,8 +314,40 @@ use {
   },
   config = function()
     require("avante").setup({
+      -- web_search_engine = {
+      --   provider = "searxng",  -- switch from tavily
+      -- },
       provider = "copilot",
       providers = {
+        -- search = function(query)
+        --   -- Your search function code here
+        --   local https = require("ssl.https")
+        --   local ltn12 = require("ltn12")
+        --   local url = "https://duckduckgo.com/html/?q=" .. query
+        --   local response = {}
+        --
+        --
+        --   local _, code = https.request{
+        --     url = url,
+        --     sink = ltn12.sink.table(response),
+        --     redirect = true
+        --   }
+        --
+        --   if code ~= 200 then
+        --     return nil, "HTTP error: " .. tostring(code)
+        --   end
+        --
+        --   local html = table.concat(response)
+        --   local results = {}
+        --
+        --   for href, title in html:gmatch('<a class="result__a".-href="(.-)".-?>(.-)</a>') do
+        --     local clean_title = title:gsub("<.->", "")
+        --     table.insert(results, { title = clean_title, url = href })
+        --   end
+        --
+        --   return results
+        -- end,
+
         copilot = {
           -- Your Copilot-specific config goes here (if any)
           -- For example, you can set your own keymaps or enable/disable features
@@ -350,6 +356,45 @@ use {
     })
   end
 }
+
+-- use {
+--   "yetone/avante.nvim",
+--   run = "make",
+--   dependencies = {
+--     "nvim-lua/plenary.nvim",
+--     "MunifTanjim/nui.nvim",
+--     "nvim-tree/nvim-web-devicons",
+--     "stevearc/dressing.nvim",
+--     { "MeanderingProgrammer/render-markdown.nvim", ft = { "markdown", "Avante" } }
+--   },
+--   config = function()
+--     require("avante").setup({
+--       web_search_engine = {
+--         provider = "searxng",  -- switch from tavily
+--       },
+--       provider = "copilot",
+--       providers = {
+--         copilot = {
+--           -- Your Copilot-specific config goes here (if any)
+--           -- For example, you can set your own keymaps or enable/disable features
+--         }
+--       }
+--     })
+--   end
+-- }
+
+-- use {
+--   "yetone/avante.nvim",
+--   run = "make",
+--   config = function()
+--     local avante = require("avante")
+--     avante.setup({
+--       web_search_engine = {
+--         provider = "duckduckgo",
+--       },
+--     })
+--   end
+-- }
 
 -- Automatically set up your configuration after cloning packer.nvim
 -- Put this at the end after all plugins
