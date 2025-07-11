@@ -93,11 +93,6 @@ local use = packer.use
     -- opt = true
   }
 
-  use { --Stopped working after disabling nvim-cmp
-    'hrsh7th/cmp-nvim-lsp',
-    after = { "nvim-lspconfig" }
-  }
-
   use {
     "jose-elias-alvarez/null-ls.nvim",
     after = { "nvim-lspconfig" }
@@ -105,6 +100,11 @@ local use = packer.use
 
   -- Make Neovim's fold look modern and keep high performance
   -- use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'}
+
+  use { --Stopped working after disabling nvim-cmp
+    'hrsh7th/cmp-nvim-lsp',
+    after = { "nvim-lspconfig" }
+  }
 
   -- Autocomplete. Replace with COC
   use {
