@@ -30,7 +30,7 @@ function is_vcc_any()
 end
 
 function is_ht_any()
-  return is_ht_dhu() or is_ht_uxc()
+  return is_ht_dhu() or is_ht_uxc_or_bolide()
 end
 
 function is_ht_uxc()
@@ -39,8 +39,18 @@ function is_ht_uxc()
   return path == template
 end
 
-function is_not_ht_uxc()
-  return not is_ht_uxc()
+function is_ht_bolide()
+  local template = "/home/ivan/sources/haleytek-bolide"
+  local path = string.sub(vim.fn.getcwd(), 0, string.len(template))
+  return path == template
+end
+
+function is_ht_uxc_or_bolide()
+  return is_ht_uxc() or is_ht_bolide()
+end
+
+function is_not_ht_uxc_or_bolide()
+  return not is_ht_uxc_or_bolide()
 end
 
 function is_work_source()
@@ -156,36 +166,26 @@ wk.add({
   { "<space>pn", "<cmd>silent exec '!playerctl next'<cr>", desc = "Next" },
   { "<space>pb", "<cmd>silent exec '!playerctl previous'<cr>", desc = "Before" },
   { "<space>pw", "<cmd>silent exec '!playerctl show'<cr>", desc = "Show" },
-  -- { "<space>ph", group = "Player Shuffle..." },
-  -- { "<space>phn", "<cmd>Spotify shuffle on<cr>", desc = "Shuffle On" },
-  -- { "<space>phf", "<cmd>Spotify shuffle off<cr>", desc = "Shuffle Off" },
+  -- All build scripts
   { "<space>v", group = "Vendor Source Code Tools...", cond = is_any_source},
   { "<space>vF", "<cmd>:tab :term compile_command_selector flash_all<cr>", desc = "Flash ALL", cond = is_vcc_dhu },
-  { "<space>vF", "<cmd>:tab :term compile_command_selector flash_all<cr>", desc = "Flash ALL", cond = is_ht_uxc },
+  { "<space>vF", "<cmd>:tab :term compile_command_selector flash_all<cr>", desc = "Flash ALL", cond = is_ht_uxc_or_bolide },
   { "<space>vI", "<cmd>:tab :term compile_command_selector ihu_make_clean<cr>", desc = "Ihu Make QNX With Clean", cond = is_vcc_any},
-  -- BEFORE_SERVER_REMOVE{ "<space>vI", "<cmd>:tab :term compile_command_selector image_qnx_clean<cr>", desc = "Image Make QNX With Clean", cond = is_ht_uxc},
-  { "<space>vI", string.format('<cmd>:tab :term compile_command_selector image_qnx_clean %s<cr>', vim.v.servername), desc = "Image Make QNX With Clean", cond = is_ht_uxc},
+  { "<space>vI", string.format('<cmd>:tab :term compile_command_selector image_qnx_clean %s<cr>', vim.v.servername), desc = "Image Make QNX With Clean", cond = is_ht_uxc_or_bolide},
   { "<space>vd", "<cmd>:tab :term compile_command_selector moose_dl<cr>", desc = "Download", cond = is_vcc_any},
   { "<space>vc", "<cmd>:tab :term compile_command_selector clean<cr>", desc = "Clean", cond = is_ht_dhu},
-  -- BEFORE_SERVER_REMOVE{ "<space>ve", "<cmd>:tab :term error_menu ~/build.out<cr>", desc = "Show Errors", cond = is_not_ht_uxc},
-  { "<space>ve", string.format('<cmd>:tab :term tail -n 3000 ~/build.out; error_menu ~/build.out %s<cr>', vim.v.servername), desc = "Show Errors", cond = is_not_ht_uxc},
-  -- BEFORE_SERVER_REMOVE{ "<space>ve", "<cmd>:tab :term error_menu /home/ivan/sources/haleytek-uxc/qnx/apps/qnx_ap/cvendor/build-qnx/build.out<cr>", desc = "Show Errors", cond = is_ht_uxc},
+  { "<space>ve", string.format('<cmd>:tab :term tail -n 3000 ~/build.out; error_menu ~/build.out %s<cr>', vim.v.servername), desc = "Show Errors", cond = is_not_ht_uxc_or_bolide},
   { "<space>ve", string.format('<cmd>:tab :term tail -n 3000 /home/ivan/sources/haleytek-uxc/qnx/apps/qnx_ap/cvendor/build-qnx/build.out; error_menu /home/ivan/sources/haleytek-uxc/qnx/apps/qnx_ap/cvendor/build-qnx/build.out %s<cr>', vim.v.servername), desc = "Show Errors", cond = is_ht_uxc},
+  { "<space>ve", string.format('<cmd>:tab :term tail -n 3000 /home/ivan/sources/haleytek-bolide/qnx/apps/qnx_ap/cvendor/build-qnx/build.out; error_menu /home/ivan/sources/haleytek-bolide/qnx/apps/qnx_ap/cvendor/build-qnx/build.out %s<cr>', vim.v.servername), desc = "Show Errors", cond = is_ht_bolide},
   { "<space>vf", "<cmd>:tab :term compile_command_selector flash<cr>", desc = "Flash QNX", cond = is_vcc_any},
-  { "<space>vf", "<cmd>:tab :term compile_command_selector flash<cr>", desc = "Flash QNX", cond = is_ht_uxc },
+  { "<space>vf", "<cmd>:tab :term compile_command_selector flash<cr>", desc = "Flash QNX", cond = is_ht_uxc_or_bolide },
   { "<space>vi", "<cmd>:tab :term compile_command_selector ihu_make<cr>", desc = "Ihu Make QNX", cond = is_vcc_any},
-  -- BEFORE_SERVER_REMOVE{ "<space>vi", "<cmd>:tab :term compile_command_selector image_qnx<cr>", desc = "Image Make QNX", cond = is_ht_uxc},
-  { "<space>vi", string.format('<cmd>:tab :term compile_command_selector image_qnx %s<cr>', vim.v.servername), desc = "Image Make QNX", cond = is_ht_uxc},
-  -- BEFORE_SERVER_REMOVE{ "<space>vm", "<cmd>:tab :term compile_command_selector make<cr>", desc = "Make", cond = is_work_source},
+  { "<space>vi", string.format('<cmd>:tab :term compile_command_selector image_qnx %s<cr>', vim.v.servername), desc = "Image Make QNX", cond = is_ht_uxc_or_bolide},
   { "<space>vm", string.format('<cmd>:tab :term compile_command_selector make %s<cr>', vim.v.servername), desc = "Make", cond = is_work_source},
-  { "<space>vt", group = "Testing...", cond = is_vcc_dhu},
-  { "<space>vta", "<cmd>:tab :term compile_command_selector test-chimes-all<cr>", desc = "Test All Chimes", cond = is_vcc_dhu},
-  { "<space>vte", "<cmd>:tab :term compile_command_selector test-chimes-ext<cr>", desc = "Test Exterior Chimes", cond = is_vcc_dhu},
-  { "<space>vti", "<cmd>:tab :term compile_command_selector test-chimes-int<cr>", desc = "Test Interior Chimes", cond = is_vcc_dhu},
-  -- BEFORE_SERVER_REMOVE{ "<space>vu", "<cmd>:tab :term compile_command_selector ut<cr>", desc = "Unit Tests", cond = is_work_source},
   { "<space>vu", string.format('<cmd>:tab :term compile_command_selector ut %s<cr>', vim.v.servername), desc = "Unit Tests", cond = is_work_source},
   { "<space>vm", "<cmd>:tab :term [[ \"$PWD\" =~ \"advent_of_code/20\" ]] && bash -c 'echo \"AoC detected\" && git add . && git commit --allow-empty -m \"REAL RUN: $(date)\" && rm -rf ./build && cmake -B ./build && cmake --build ./build && ./build/app' 2>&1 | tee /home/ivan/build.out || echo \"error: AoC ditectory is not detected\"; error_menu ~/build.out <cr>", desc = "Run", cond = is_aoc_source},
   { "<space>vu", "<cmd>:tab :term [[ \"$PWD\" =~ \"advent_of_code/20\" ]] && bash -c 'echo \"AoC detected\" && git add . && git commit --allow-empty -m \"TEST RUN: $(date)\" && rm -rf ./build && cmake -B ./build -DTEST= && cmake --build ./build && ./build/app' 2>&1 | tee /home/ivan/build.out || echo \"error: AoC ditectory is not detected\"; error_menu ~/build.out <cr>", desc = "Test", cond = is_aoc_source},
+
   { "g", group = "Go to..." },
   { "gD", "<cmd>lua vim.lsp.buf.definition()<cr>", desc = "Goto Defenition" },
   { "gT", "<cmd>lua vim.lsp.buf.type_definition()<cr>", desc = "Type definition" },
