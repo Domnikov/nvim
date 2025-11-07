@@ -71,3 +71,30 @@ autocmd('BufLeave', {
   pattern = 'term://*',
   command = 'stopinsert'
 })
+
+-- Create compile_commands file
+autocmd("VimEnter", {
+  pattern = "*",
+  callback = function()
+    local compile_script = vim.fn.expand("~/local/bin/update_all_compile_commands")
+    if vim.fn.executable(compile_script) == 1 then
+      vim.fn.jobstart({ compile_script }, {
+        stdout_buffered = true,
+        stderr_buffered = true,
+        on_stdout = function(_, data)
+          if data then
+            -- vim.notify(table.concat(data, "\n"), vim.log.levels.INFO)
+          end
+        end,
+        on_stderr = function(_, data)
+          if data then
+            vim.notify(table.concat(data, "\n"), vim.log.levels.ERROR)
+          end
+        end,
+      })
+    else
+      vim.notify("merge_compile_commands.sh not found or not executable", vim.log.levels.ERROR)
+    end
+  end,
+})
+
