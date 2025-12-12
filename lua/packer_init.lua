@@ -90,7 +90,6 @@ local use = packer.use
   use {
     'neovim/nvim-lspconfig',
     after = { "impatient.nvim" }
-    -- opt = true
   }
 
   use {
@@ -116,7 +115,6 @@ local use = packer.use
       'saadparwaiz1/cmp_luasnip',
     },
   module = 'cmp'
-    -- opt = true
   }
 
   -- Automatically adjusts 'shiftwidth' and 'expandtab' based on the current file
@@ -126,7 +124,6 @@ local use = packer.use
   use {
     'nvim-lualine/lualine.nvim',
     requires = { 'kyazdani42/nvim-web-devicons', opt = true },
-    -- opt = true
   }
 
   -- git labels
@@ -136,32 +133,24 @@ local use = packer.use
     config = function()
       require('gitsigns').setup()
     end,
-    -- opt = true
   }
 
   -- magit
   use {
     'TimUntersberger/neogit',
     requires = 'nvim-lua/plenary.nvim',
-    -- opt = true,
   }
 
   -- prettier keymaps
   use {
     'folke/which-key.nvim',
-    -- opt = true
   }
 
   -- fuzzy find all the things
   use {
     'nvim-telescope/telescope.nvim',
     requires = { {'nvim-lua/plenary.nvim'} },
-    -- opt = true
   }
-
-  -- surround
-  -- use 'tpope/vim-surround' -- Enbale back if doesn't work commends to change inside "", '', () and etc
-  -- use 'tpope/vim-repeat' -- Repeat last command in some smart way instead of pressing '.' all the time
 
   -- Ivan
   -- Show various informatin each line
@@ -241,11 +230,9 @@ local use = packer.use
   opt = true,
   event = "BufReadPre",
   module = { "dap" },
---  wants = {"nvim-dap-ui"},
   wants = { "nvim-dap-virtual-text", "DAPInstall.nvim", "nvim-dap-ui"},
     requires = {
       "Pocco81/DAPInstall.nvim",
---      "theHamsta/nvim-dap-virtual-text",
       "rcarriga/nvim-dap-ui",
       "nvim-telescope/telescope-dap.nvim",
       { "jbyuki/one-small-step-for-vimkind", module = "osv" },
@@ -303,7 +290,6 @@ use { 'jackMort/ChatGPT.nvim',      -- ChatGPT for Neovim (GPT interaction)
 
 use {
   "yetone/avante.nvim",
-  -- rocks = {"luasec"}, -- luarocks doesn't work :(
   run = "make BUILD_FROM_SOURCE=true",
   dependencies = {
     "nvim-lua/plenary.nvim",
@@ -314,87 +300,14 @@ use {
   },
   config = function()
     require("avante").setup({
-      -- web_search_engine = {
-      --   provider = "searxng",  -- switch from tavily
-      -- },
       provider = "copilot",
       providers = {
-        -- search = function(query)
-        --   -- Your search function code here
-        --   local https = require("ssl.https")
-        --   local ltn12 = require("ltn12")
-        --   local url = "https://duckduckgo.com/html/?q=" .. query
-        --   local response = {}
-        --
-        --
-        --   local _, code = https.request{
-        --     url = url,
-        --     sink = ltn12.sink.table(response),
-        --     redirect = true
-        --   }
-        --
-        --   if code ~= 200 then
-        --     return nil, "HTTP error: " .. tostring(code)
-        --   end
-        --
-        --   local html = table.concat(response)
-        --   local results = {}
-        --
-        --   for href, title in html:gmatch('<a class="result__a".-href="(.-)".-?>(.-)</a>') do
-        --     local clean_title = title:gsub("<.->", "")
-        --     table.insert(results, { title = clean_title, url = href })
-        --   end
-        --
-        --   return results
-        -- end,
-
         copilot = {
-          -- Your Copilot-specific config goes here (if any)
-          -- For example, you can set your own keymaps or enable/disable features
         }
       }
     })
   end
 }
-
--- use {
---   "yetone/avante.nvim",
---   run = "make",
---   dependencies = {
---     "nvim-lua/plenary.nvim",
---     "MunifTanjim/nui.nvim",
---     "nvim-tree/nvim-web-devicons",
---     "stevearc/dressing.nvim",
---     { "MeanderingProgrammer/render-markdown.nvim", ft = { "markdown", "Avante" } }
---   },
---   config = function()
---     require("avante").setup({
---       web_search_engine = {
---         provider = "searxng",  -- switch from tavily
---       },
---       provider = "copilot",
---       providers = {
---         copilot = {
---           -- Your Copilot-specific config goes here (if any)
---           -- For example, you can set your own keymaps or enable/disable features
---         }
---       }
---     })
---   end
--- }
-
--- use {
---   "yetone/avante.nvim",
---   run = "make",
---   config = function()
---     local avante = require("avante")
---     avante.setup({
---       web_search_engine = {
---         provider = "duckduckgo",
---       },
---     })
---   end
--- }
 
 -- Automatically set up your configuration after cloning packer.nvim
 -- Put this at the end after all plugins
