@@ -273,53 +273,53 @@ local use = packer.use
   }
 
 -- All AI related plugins
--- use 'github/copilot.vim'            -- GitHub Copilot for Neovim
---
--- use({
---   'neoclide/coc.nvim', -- For GPT completions and interactions
---   branch = 'release',
---   run = 'npm ci --legacy-peer-deps',
--- })
---
--- use { 'jackMort/ChatGPT.nvim',      -- ChatGPT for Neovim (GPT interaction)
---   requires = {
---     'MunifTanjim/nui.nvim', -- required for UI components
---     'nvim-lua/plenary.nvim', -- required for async operations
---   },
--- }
---
--- use {
---   "yetone/avante.nvim",
---   run = "make BUILD_FROM_SOURCE=true",
---   dependencies = {
---     "nvim-lua/plenary.nvim",
---     "MunifTanjim/nui.nvim",
---     "nvim-tree/nvim-web-devicons",
---     "stevearc/dressing.nvim",
---     { "MeanderingProgrammer/render-markdown.nvim", ft = { "markdown", "Avante" } }
---   },
---   config = function()
---     require("avante").setup({
---       provider = "copilot",
---       providers = {
---         copilot = {
---         }
---       }
---     })
---   end
--- }
-  use {
-    "CopilotC-Nvim/CopilotChat.nvim",
-    run = "make tiktoken",
-    dependencies = {
-      "nvim-lua/plenary.nvim"
-    },
-    config = function()
-      require("notify").setup({
-        require("CopilotChat").setup()
-      })
-    end,
-  }
+use 'github/copilot.vim'            -- GitHub Copilot for Neovim
+
+use({
+  'neoclide/coc.nvim', -- For GPT completions and interactions
+  branch = 'release',
+  run = 'npm ci --legacy-peer-deps',
+})
+
+use { 'jackMort/ChatGPT.nvim',      -- ChatGPT for Neovim (GPT interaction)
+  requires = {
+    'MunifTanjim/nui.nvim', -- required for UI components
+    'nvim-lua/plenary.nvim', -- required for async operations
+  },
+}
+
+use {
+  "yetone/avante.nvim",
+  run = "make BUILD_FROM_SOURCE=true",
+  dependencies = {
+    "nvim-lua/plenary.nvim",
+    "MunifTanjim/nui.nvim",
+    "nvim-tree/nvim-web-devicons",
+    "stevearc/dressing.nvim",
+    { "MeanderingProgrammer/render-markdown.nvim", ft = { "markdown", "Avante" } }
+  },
+  config = function()
+    require("avante").setup({
+      provider = "copilot",
+      providers = {
+        copilot = {
+        }
+      }
+    })
+  end
+}
+  -- use {
+  --   "CopilotC-Nvim/CopilotChat.nvim",
+  --   run = "make tiktoken",
+  --   dependencies = {
+  --     "nvim-lua/plenary.nvim"
+  --   },
+  --   config = function()
+  --     require("notify").setup({
+  --       require("CopilotChat").setup()
+  --     })
+  --   end,
+  -- }
 
 
 -- Automatically set up your configuration after cloning packer.nvim
