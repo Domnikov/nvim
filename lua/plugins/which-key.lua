@@ -25,6 +25,18 @@ function is_vcc_uxc()
   return path == template
 end
 
+function is_safety_8155()
+  local template = "/home/ivan/sources/manifest-safety-8155"
+  local path = string.sub(vim.fn.getcwd(), 0, string.len(template))
+  return path == template
+end
+
+function is_safety_8255()
+  local template = "/home/ivan/sources/manifest-safety-8255"
+  local path = string.sub(vim.fn.getcwd(), 0, string.len(template))
+  return path == template
+end
+
 function is_vcc_any()
   return is_vcc_dhu() or is_vcc_uxc()
 end
@@ -54,7 +66,7 @@ function is_not_ht_uxc_or_bolide()
 end
 
 function is_work_source()
-  return is_vcc_any() or is_ht_any()
+  return is_vcc_any() or is_ht_any() or is_safety_8155() or is_safety_8255()
 end
 
 function is_aoc_source()
