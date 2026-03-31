@@ -243,7 +243,7 @@ local use = packer.use
 -- Open file with line number
   use 'wsdjeg/vim-fetch'
 
--- Fancy symbols
+-- Fancy symbols. TODO: Change to https://github.com/stevearc/aerial.nvim
   use {
     'simrat39/symbols-outline.nvim',
     config = function()
@@ -273,7 +273,17 @@ local use = packer.use
   }
 
 -- All AI related plugins
-use 'github/copilot.vim'            -- GitHub Copilot for Neovim
+-- use 'github/copilot.vim'            -- GitHub Copilot for Neovim
+use {
+  "zbirenbaum/copilot.lua",
+  event = "InsertEnter",
+  config = function()
+    require("copilot").setup({
+      suggestion = { enabled = true },
+      panel = { enabled = false },
+    })
+  end
+}
 
 use({
   'neoclide/coc.nvim', -- For GPT completions and interactions
