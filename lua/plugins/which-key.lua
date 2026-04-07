@@ -195,6 +195,7 @@ wk.add({
   { "<space>vi", string.format('<cmd>:tab :term compile_command_selector image_qnx %s<cr>', vim.v.servername), desc = "Image Make QNX", cond = is_ht_uxc_or_bolide},
   { "<space>vm", string.format('<cmd>:tab :term compile_command_selector make %s<cr>', vim.v.servername), desc = "Make", cond = is_work_source},
   { "<space>vu", string.format('<cmd>:tab :term compile_command_selector ut %s<cr>', vim.v.servername), desc = "Unit Tests", cond = is_work_source},
+  { "<space>vU", string.format('<cmd>:tab :term compile_command_selector ut-qnx %s<cr>', vim.v.servername), desc = "Unit Tests For QNX + Coverage", cond = is_safety_8255},
   { "<space>vm", string.format("<cmd>:tab :term [[ \"$PWD\" =~ \"advent_of_code/20\" ]] && bash -c 'echo \"AoC detected\" && git add . && git commit --allow-empty -m \"REAL RUN: $(date)\" && rm -rf ./build && cmake -B ./build && cmake --build ./build && ./build/app' 2>&1 | tee /home/ivan/build.out || echo \"error: AoC ditectory is not detected\"; error_menu ~/build.out %s<cr>", vim.v.servername), desc = "Run", cond = is_aoc_source},
   { "<space>vu", string.format("<cmd>:tab :term [[ \"$PWD\" =~ \"advent_of_code/20\" ]] && bash -c 'echo \"AoC detected\" && git add . && git commit --allow-empty -m \"TEST RUN: $(date)\" && rm -rf ./build && cmake -B ./build -DTEST= && cmake --build ./build && ./build/app' 2>&1 | tee /home/ivan/build.out || echo \"error: AoC ditectory is not detected\"; error_menu ~/build.out %s<cr>", vim.v.servername), desc = "Test", cond = is_aoc_source},
 
