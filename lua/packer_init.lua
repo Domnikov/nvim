@@ -298,40 +298,6 @@ use { 'jackMort/ChatGPT.nvim',      -- ChatGPT for Neovim (GPT interaction)
   },
 }
 
-use {
-  "yetone/avante.nvim",
-  run = "make BUILD_FROM_SOURCE=true",
-  dependencies = {
-    "nvim-lua/plenary.nvim",
-    "MunifTanjim/nui.nvim",
-    "nvim-tree/nvim-web-devicons",
-    "stevearc/dressing.nvim",
-    { "MeanderingProgrammer/render-markdown.nvim", ft = { "markdown", "Avante" } }
-  },
-  config = function()
-    require("avante").setup({
-      provider = "copilot",
-      providers = {
-        copilot = {
-        }
-      }
-    })
-  end
-}
-  -- use {
-  --   "CopilotC-Nvim/CopilotChat.nvim",
-  --   run = "make tiktoken",
-  --   dependencies = {
-  --     "nvim-lua/plenary.nvim"
-  --   },
-  --   config = function()
-  --     require("notify").setup({
-  --       require("CopilotChat").setup()
-  --     })
-  --   end,
-  -- }
-
-
 -- Automatically set up your configuration after cloning packer.nvim
 -- Put this at the end after all plugins
 if packer_bootstrap then
