@@ -11,14 +11,9 @@
 -- Enable for debugging
 -- vim.lsp.set_log_level("debug")
 
-local lsp_status_ok, lspconfig = pcall(require, 'lspconfig')
-if not lsp_status_ok then
-  return
-end
-
 local cmp_status_ok, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
 if not cmp_status_ok then
-  return
+    return
 end
 
 -- Replace some simbols
@@ -71,10 +66,10 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
-  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+    local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
   -- Highlighting references
-  if client.server_capabilities.documentFormattingProvider then
+  if client.server_capabilities.documentHighlightProvider then
     vim.api.nvim_exec([[
       augroup lsp_document_highlight
         autocmd! * <buffer>
@@ -115,8 +110,9 @@ https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.m
 -- Define `root_dir` when needed
 -- See: https://github.com/neovim/nvim-lspconfig/issues/320
 -- This is a workaround, maybe not work with some servers.
-local root_dir = function()
-  return vim.fn.getcwd()
+local root_dir = function(fname)
+  local found = vim.fs.root(fname, { ".git", "compile_commands.json" }) or vim.fn.getcwd()
+    return found
 end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
@@ -126,53 +122,56 @@ local servers = { 'bashls', 'pyright', 'html', 'cssls', 'clangd' }
 
 -- Call setup
 for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
+  local config = {
     on_attach = on_attach,
     root_dir = root_dir,
     capabilities = capabilities,
-    flags = {
-      -- default in neovim 0.7+
-      debounce_text_changes = 150,
-    }
   }
-end
 
--- lspconfig['ccls'].setup {
---   cmd = { "ccls" };
---   on_attach = on_attach,
---   root_dir = root_dir,
---   capabilities = capabilities,
---   init_options = {
---     cache = {
---       compilationDatabaseDirectory = ".";
---       directory = "~/.cache/ccls";
---     };
---     clang = {
---       extraArgs = {"-std=c++17"};
---     };
---     index = {
---       blacklist = {"."};
---       threads = 16;
---       timeout = 500000;
---       whitelist = {
---         ".",
---         "."
---       };
---     };
---     request = {
---       timeout = 500000;
---     };
---   }
--- }
+  if lsp == "clangd" then
+    config.cmd = {
+      "clangd",
+      "-j=10",
+      "--pretty",
+      "--background-index",
+      "--clang-tidy",
+    }
+  end
 
-require'lspconfig'.clangd.setup{
-  cmd = { "clangd",
-     "-j=10",
-     "--pretty",
-     "--background-index",
-     "--clang-tidy",
-   };
+  vim.lsp.config(lsp, config)
+  end
+
+-- Automatically enable LSP for supported filetypes
+local lsp_filetype_map = {
+  c = "clangd",
+  cpp = "clangd",
+  h = "clangd",
+  hpp = "clangd",
+  python = "pyright",
+  bash = "bashls",
+  sh = "bashls",
+  html = "html",
+  css = "cssls",
 }
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = {"c", "cpp", "h", "hpp", "python", "bash", "sh", "html", "css"},
+  callback = function(args)
+    local ft = vim.bo[args.buf].filetype
+    local lsp = lsp_filetype_map[ft]
+        if lsp then
+      vim.lsp.enable(lsp)
+          end
+  end,
+})
+
+
+-- Debug: Print LSP clients on BufEnter for C/C++
+vim.api.nvim_create_autocmd("BufEnter", {
+  pattern = {"*.cpp", "*.c", "*.h", "*.hpp"},
+  callback = function()
+      end,
+})
 
 -----------------------------------------------------------
 -- Autocomplete configuration file
