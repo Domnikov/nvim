@@ -93,7 +93,7 @@ autocmd("VimEnter", {
         end,
       })
     else
-      vim.notify("merge_compile_commands.sh not found or not executable", vim.log.levels.ERROR)
+      -- vim.notify("merge_compile_commands.sh not found or not executable", vim.log.levels.ERROR)
     end
   end,
 })
