@@ -37,6 +37,10 @@ function is_safety_8255()
   return path == template
 end
 
+function is_safety()
+  return is_safety_8155() or is_safety_8255()
+end
+
 function is_vcc_any()
   return is_vcc_dhu() or is_vcc_uxc()
 end
@@ -195,7 +199,24 @@ wk.add({
   { "<space>vi", string.format('<cmd>:tab :term compile_command_selector image_qnx %s<cr>', vim.v.servername), desc = "Image Make QNX", cond = is_ht_uxc_or_bolide},
   { "<space>vm", string.format('<cmd>:tab :term compile_command_selector make %s<cr>', vim.v.servername), desc = "Make", cond = is_work_source},
   { "<space>vu", string.format('<cmd>:tab :term compile_command_selector ut %s<cr>', vim.v.servername), desc = "Unit Tests", cond = is_work_source},
-  { "<space>vU", string.format('<cmd>:tab :term compile_command_selector ut-qnx %s<cr>', vim.v.servername), desc = "Unit Tests For QNX + Coverage", cond = is_safety_8255},
+  { "<space>vU", string.format('<cmd>:tab :term compile_command_selector ut-qnx %s<cr>', vim.v.servername), desc = "Unit Tests For QNX + Coverage", cond = is_safety},
+  { "<space>vp", group = "Polyspace checkers", cond = is_safety},
+  { "<space>vpf", function()
+      local file = vim.fn.expand('%:p')
+      vim.cmd('tab term python3 /home/ivan/sources/manifest-safety-8255/tools/haleytek/safety_test_tools/scripts/polyspace_analyse_file.py -v ' .. vim.fn.shellescape(file))
+    end, desc = "Polyspace: Check File", cond = is_safety },
+  { "<space>vpd", function()
+      local dir = vim.fn.expand('%:p:h')
+      vim.cmd('tab term python3 /home/ivan/sources/manifest-safety-8255/tools/haleytek/safety_test_tools/scripts/polyspace_analyse_file.py -v ' .. vim.fn.shellescape(dir))
+    end, desc = "Polyspace: Check Directory", cond = is_safety },
+  { "<space>vpF", function()
+      local file = vim.fn.expand('%:p')
+      vim.cmd('tab term python3 /home/ivan/sources/manifest-safety-8255/tools/haleytek/safety_test_tools/scripts/polyspace_analyse_file.py --open -v ' .. vim.fn.shellescape(file))
+    end, desc = "Polyspace: Check File And Open", cond = is_safety },
+  { "<space>vpD", function()
+      local dir = vim.fn.expand('%:p:h')
+      vim.cmd('tab term python3 /home/ivan/sources/manifest-safety-8255/tools/haleytek/safety_test_tools/scripts/polyspace_analyse_file.py --open -v ' .. vim.fn.shellescape(dir))
+    end, desc = "Polyspace: Check Directory And Open", cond = is_safety },
   { "<space>vm", string.format("<cmd>:tab :term [[ \"$PWD\" =~ \"advent_of_code/20\" ]] && bash -c 'echo \"AoC detected\" && git add . && git commit --allow-empty -m \"REAL RUN: $(date)\" && rm -rf ./build && cmake -B ./build && cmake --build ./build && ./build/app' 2>&1 | tee /home/ivan/build.out || echo \"error: AoC ditectory is not detected\"; error_menu ~/build.out %s<cr>", vim.v.servername), desc = "Run", cond = is_aoc_source},
   { "<space>vu", string.format("<cmd>:tab :term [[ \"$PWD\" =~ \"advent_of_code/20\" ]] && bash -c 'echo \"AoC detected\" && git add . && git commit --allow-empty -m \"TEST RUN: $(date)\" && rm -rf ./build && cmake -B ./build -DTEST= && cmake --build ./build && ./build/app' 2>&1 | tee /home/ivan/build.out || echo \"error: AoC ditectory is not detected\"; error_menu ~/build.out %s<cr>", vim.v.servername), desc = "Test", cond = is_aoc_source},
 
