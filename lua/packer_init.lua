@@ -93,7 +93,7 @@ local use = packer.use
   }
 
   use {
-    "jose-elias-alvarez/null-ls.nvim",
+    "nvimtools/none-ls.nvim",
     after = { "nvim-lspconfig" }
   }
 
@@ -109,7 +109,10 @@ local use = packer.use
   use {
     'hrsh7th/nvim-cmp',
     requires = {
-      'L3MON4D3/LuaSnip',
+      {
+        'L3MON4D3/LuaSnip',
+        run = 'make install_jsregexp',
+      },
       'hrsh7th/cmp-path',
       'hrsh7th/cmp-buffer',
       'saadparwaiz1/cmp_luasnip',
@@ -182,18 +185,19 @@ local use = packer.use
   use {
     "kevinhwang91/nvim-hlslens",
     config = function()
-      -- require('hlslens').setup() is not required
-      require("scrollbar.handlers.search").setup({
-          nearest_float_when = 'never',
-      })
+        require("hlslens").setup({
+            calm_down = true,
+            nearest_only = false,
+            nearest_float_when = "never",
+        })
     end,
-  }
+}
   -- looks ugly. But has some use
   use {
-    'petertriho/nvim-scrollbar',
+    "petertriho/nvim-scrollbar",
+    branch = "refactor/v2",
     requires = {
-      'kevinhwang91/nvim-hlslens',
-      'lewis6991/gitsigns.nvim'
+        "lewis6991/gitsigns.nvim",
     },
   }
 

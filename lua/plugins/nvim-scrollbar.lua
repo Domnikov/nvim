@@ -1,98 +1,97 @@
--- require('hlslens').setup({
---     calm_down = true,
---     nearest_only = false,
---     nearest_float_when = 'always'
--- })
-
 require("scrollbar").setup({
-    show = true,
-    show_in_active_only = false,
     set_highlights = true,
-    folds = 1000, -- handle folds, set to number to disable folds if no. of lines in buffer exceeds this
-    max_lines = false, -- disables if no. of lines in buffer exceeds this
-    handle = {
-        text = " ",
-        color = '#b2bbcc',
-        cterm = nil,
-        highlight = "CursorColumn",
-        hide_if_all_visible = true, -- Hides handle if all lines are visible
+
+    -- Preserve diagnostic, search, and Git marks.
+    providers = {
+        cursor = false,
+        diagnostic = true,
+        search = true,
+        gitsigns = true,
+        ale = false,
     },
+
+    -- Exclude terminal and prompt buffers.
+    exclude = {
+        buftypes = {
+            terminal = true,
+        },
+        filetypes = {
+            prompt = true,
+            TelescopePrompt = true,
+        },
+    },
+
+    -- Preserve your marker colors and characters.
     marks = {
         Search = {
             text = { "-", "=" },
             priority = 0,
-            color = '#98c379',
-            cterm = nil,
-            highlight = "Search",
+            highlight = {
+                fg = "#98c379",
+            },
         },
+
         Error = {
             text = { "-", "=" },
             priority = 1,
-            color = '#e86671',
-            cterm = nil,
-            highlight = "DiagnosticVirtualTextError",
+            highlight = {
+                fg = "#e86671",
+            },
         },
+
         Warn = {
             text = { "-", "=" },
             priority = 2,
-            color = '#d19a66',
-            cterm = nil,
-            highlight = "DiagnosticVirtualTextWarn",
+            highlight = {
+                fg = "#d19a66",
+            },
         },
+
         Info = {
             text = { "-", "=" },
             priority = 3,
-            color = '#e5c07b',
-            cterm = nil,
-            highlight = "DiagnosticVirtualTextInfo",
+            highlight = {
+                fg = "#e5c07b",
+            },
         },
+
         Hint = {
             text = { "-", "=" },
             priority = 4,
-            color = '#c678dd',
-            cterm = nil,
-            highlight = "DiagnosticVirtualTextHint",
+            highlight = {
+                fg = "#c678dd",
+            },
         },
+
         Misc = {
             text = { "-", "=" },
             priority = 5,
-            color = '#c678dd',
-            cterm = nil,
-            highlight = "Normal",
+            highlight = {
+                fg = "#c678dd",
+            },
         },
     },
-    excluded_buftypes = {
-        "terminal",
-    },
-    excluded_filetypes = {
-        "prompt",
-        "TelescopePrompt",
-    },
-    autocmd = {
-        render = {
-            "BufWinEnter",
-            "TabEnter",
-            "TermEnter",
-            "WinEnter",
-            "CmdwinLeave",
-            "TextChanged",
-            "VimResized",
-            "WinScrolled",
+
+    scrollbar = {
+        -- Display scrollbars in all eligible windows.
+        visibility = "all",
+
+        -- Preserve the original handle color and appearance.
+        thumb = {
+            text = " ",
+            highlight = {
+                bg = "#b2bbcc",
+            },
+            hide_if_all_visible = true,
         },
-        clear = {
-            "BufWinLeave",
-            "TabLeave",
-            "TermLeave",
-            "WinLeave",
-        },
-    },
-    handlers = {
-        cursor = false,
-        diagnostic = true,
-        gitsigns = true, -- Requires gitsigns
-        handle = true,
-        search = true, -- Requires hlslens
-        ale = false, -- Requires ale
+
+        -- Account for wrapped lines and closed folds.
+        unit = "screenline",
+
+        -- Preserve the original maximum-line behavior.
+        max_lines = false,
+
+        -- Keep rendering responsive.
+        throttle_ms = 100,
     },
 })
-

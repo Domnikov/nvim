@@ -24,7 +24,8 @@ opt.relativenumber = true   -- Show Relative numbers
 opt.cursorline = true       -- Highlight Cursor line
 opt.cursorlineopt= 'number' -- Hight onle number
 opt.showmatch = true        -- Highlight matching parenthesis
-opt.foldmethod = 'marker'   -- Enable folding (default 'foldmarker')
+opt.foldenable = false      -- Disable folding
+opt.foldmethod = 'manual'   -- Enable folding (default 'foldmarker')
 -- opt.colorcolumn = '80'      -- Line lenght marker at 80 columns
 opt.splitright = true       -- Vertical split to the right
 opt.splitbelow = true       -- Horizontal split to the bottom
@@ -76,12 +77,12 @@ g.loaded_perl_provider = 0
 g.clipboard = {
     name = 'myClipboard',
     copy = {
-        ["+"] = {'/home/ivan/local/bin/my_vim_copy.sh'},
-        ["*"] = {'/home/ivan/local/bin/my_vim_copy.sh'},
+        ["+"] = {'/home/idomniko/local/bin/my_vim_copy.sh'},
+        ["*"] = {'/home/idomniko/local/bin/my_vim_copy.sh'},
     },
     paste = {
-        ["+"] = {'/home/ivan/local/bin/my_vim_paste.sh'},
-        ["*"] = {'/home/ivan/local/bin/my_vim_paste.sh'},
+        ["+"] = {'/home/idomniko/local/bin/my_vim_paste.sh'},
+        ["*"] = {'/home/idomniko/local/bin/my_vim_paste.sh'},
     },
     cache_enabled = 1,
 }

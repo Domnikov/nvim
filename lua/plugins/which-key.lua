@@ -8,31 +8,31 @@ function termcodes(str)
 end
 
 function is_vcc_dhu()
-  local template = "/home/ivan/sources/volvocars-dhu"
+  local template = "/home/idomniko/sources/volvocars-dhu"
   local path = string.sub(vim.fn.getcwd(), 0, string.len(template))
   return path == template
 end
 
 function is_ht_dhu()
-  local template = "/home/ivan/sources/haleytek-dhu"
+  local template = "/home/idomniko/sources/haleytek-dhu"
   local path = string.sub(vim.fn.getcwd(), 0, string.len(template))
   return path == template
 end
 
 function is_vcc_uxc()
-  local template = "/home/ivan/sources/volvocars-uxc"
+  local template = "/home/idomniko/sources/volvocars-uxc"
   local path = string.sub(vim.fn.getcwd(), 0, string.len(template))
   return path == template
 end
 
 function is_safety_8155()
-  local template = "/home/ivan/sources/manifest-safety-8155"
+  local template = "/home/idomniko/sources/manifest-safety-8155"
   local path = string.sub(vim.fn.getcwd(), 0, string.len(template))
   return path == template
 end
 
 function is_safety_8255()
-  local template = "/home/ivan/sources/manifest-safety-8255"
+  local template = "/home/idomniko/sources/manifest-safety-8255"
   local path = string.sub(vim.fn.getcwd(), 0, string.len(template))
   return path == template
 end
@@ -50,13 +50,13 @@ function is_ht_any()
 end
 
 function is_ht_uxc()
-  local template = "/home/ivan/sources/haleytek-uxc"
+  local template = "/home/idomniko/sources/haleytek-uxc"
   local path = string.sub(vim.fn.getcwd(), 0, string.len(template))
   return path == template
 end
 
 function is_ht_bolide()
-  local template = "/home/ivan/sources/haleytek-bolide"
+  local template = "/home/idomniko/sources/haleytek-bolide"
   local path = string.sub(vim.fn.getcwd(), 0, string.len(template))
   return path == template
 end
@@ -74,7 +74,7 @@ function is_work_source()
 end
 
 function is_aoc_source()
-  local template = "/home/ivan/sources/advent_of_code"
+  local template = "/home/idomniko/sources/advent_of_code"
   local path = string.sub(vim.fn.getcwd(), 0, string.len(template))
   return path == template
 end
@@ -191,8 +191,8 @@ wk.add({
   { "<space>vd", "<cmd>:tab :term compile_command_selector moose_dl<cr>", desc = "Download", cond = is_vcc_any},
   { "<space>vc", "<cmd>:tab :term compile_command_selector clean<cr>", desc = "Clean", cond = is_ht_dhu},
   { "<space>ve", string.format('<cmd>:tab :term tail -n 3000 ~/build.out; error_menu ~/build.out %s<cr>', vim.v.servername), desc = "Show Errors", cond = is_not_ht_uxc_or_bolide},
-  { "<space>ve", string.format('<cmd>:tab :term tail -n 3000 /home/ivan/sources/haleytek-uxc/qnx/apps/qnx_ap/cvendor/build-qnx/build.out; error_menu /home/ivan/sources/haleytek-uxc/qnx/apps/qnx_ap/cvendor/build-qnx/build.out %s<cr>', vim.v.servername), desc = "Show Errors", cond = is_ht_uxc},
-  { "<space>ve", string.format('<cmd>:tab :term tail -n 3000 /home/ivan/sources/haleytek-bolide/qnx/apps/qnx_ap/cvendor/build-qnx/build.out; error_menu /home/ivan/sources/haleytek-bolide/qnx/apps/qnx_ap/cvendor/build-qnx/build.out %s<cr>', vim.v.servername), desc = "Show Errors", cond = is_ht_bolide},
+  { "<space>ve", string.format('<cmd>:tab :term tail -n 3000 /home/idomniko/sources/haleytek-uxc/qnx/apps/qnx_ap/cvendor/build-qnx/build.out; error_menu /home/idomniko/sources/haleytek-uxc/qnx/apps/qnx_ap/cvendor/build-qnx/build.out %s<cr>', vim.v.servername), desc = "Show Errors", cond = is_ht_uxc},
+  { "<space>ve", string.format('<cmd>:tab :term tail -n 3000 /home/idomniko/sources/haleytek-bolide/qnx/apps/qnx_ap/cvendor/build-qnx/build.out; error_menu /home/idomniko/sources/haleytek-bolide/qnx/apps/qnx_ap/cvendor/build-qnx/build.out %s<cr>', vim.v.servername), desc = "Show Errors", cond = is_ht_bolide},
   { "<space>vf", "<cmd>:tab :term compile_command_selector flash<cr>", desc = "Flash QNX", cond = is_vcc_any},
   { "<space>vf", "<cmd>:tab :term compile_command_selector flash<cr>", desc = "Flash QNX", cond = is_ht_uxc_or_bolide },
   { "<space>vi", "<cmd>:tab :term compile_command_selector ihu_make<cr>", desc = "Ihu Make QNX", cond = is_vcc_any},
@@ -203,22 +203,22 @@ wk.add({
   { "<space>vp", group = "Polyspace checkers", cond = is_safety},
   { "<space>vpf", function()
       local file = vim.fn.expand('%:p')
-      vim.cmd('tab term python3 /home/ivan/sources/manifest-safety-8255/tools/haleytek/safety_test_tools/scripts/polyspace_analyse_file.py -v ' .. vim.fn.shellescape(file))
+      vim.cmd('tab term python3 /home/idomniko/sources/manifest-safety-8255/tools/haleytek/safety_test_tools/scripts/polyspace_analyse_file.py -v ' .. vim.fn.shellescape(file))
     end, desc = "Polyspace: Check File", cond = is_safety },
   { "<space>vpd", function()
       local dir = vim.fn.expand('%:p:h')
-      vim.cmd('tab term python3 /home/ivan/sources/manifest-safety-8255/tools/haleytek/safety_test_tools/scripts/polyspace_analyse_file.py -v ' .. vim.fn.shellescape(dir))
+      vim.cmd('tab term python3 /home/idomniko/sources/manifest-safety-8255/tools/haleytek/safety_test_tools/scripts/polyspace_analyse_file.py -v ' .. vim.fn.shellescape(dir))
     end, desc = "Polyspace: Check Directory", cond = is_safety },
   { "<space>vpF", function()
       local file = vim.fn.expand('%:p')
-      vim.cmd('tab term python3 /home/ivan/sources/manifest-safety-8255/tools/haleytek/safety_test_tools/scripts/polyspace_analyse_file.py --open -v ' .. vim.fn.shellescape(file))
+      vim.cmd('tab term python3 /home/idomniko/sources/manifest-safety-8255/tools/haleytek/safety_test_tools/scripts/polyspace_analyse_file.py --open -v ' .. vim.fn.shellescape(file))
     end, desc = "Polyspace: Check File And Open", cond = is_safety },
   { "<space>vpD", function()
       local dir = vim.fn.expand('%:p:h')
-      vim.cmd('tab term python3 /home/ivan/sources/manifest-safety-8255/tools/haleytek/safety_test_tools/scripts/polyspace_analyse_file.py --open -v ' .. vim.fn.shellescape(dir))
+      vim.cmd('tab term python3 /home/idomniko/sources/manifest-safety-8255/tools/haleytek/safety_test_tools/scripts/polyspace_analyse_file.py --open -v ' .. vim.fn.shellescape(dir))
     end, desc = "Polyspace: Check Directory And Open", cond = is_safety },
-  { "<space>vm", string.format("<cmd>:tab :term [[ \"$PWD\" =~ \"advent_of_code/20\" ]] && bash -c 'echo \"AoC detected\" && git add . && git commit --allow-empty -m \"REAL RUN: $(date)\" && rm -rf ./build && cmake -B ./build && cmake --build ./build && ./build/app' 2>&1 | tee /home/ivan/build.out || echo \"error: AoC ditectory is not detected\"; error_menu ~/build.out %s<cr>", vim.v.servername), desc = "Run", cond = is_aoc_source},
-  { "<space>vu", string.format("<cmd>:tab :term [[ \"$PWD\" =~ \"advent_of_code/20\" ]] && bash -c 'echo \"AoC detected\" && git add . && git commit --allow-empty -m \"TEST RUN: $(date)\" && rm -rf ./build && cmake -B ./build -DTEST= && cmake --build ./build && ./build/app' 2>&1 | tee /home/ivan/build.out || echo \"error: AoC ditectory is not detected\"; error_menu ~/build.out %s<cr>", vim.v.servername), desc = "Test", cond = is_aoc_source},
+  { "<space>vm", string.format("<cmd>:tab :term [[ \"$PWD\" =~ \"advent_of_code/20\" ]] && bash -c 'echo \"AoC detected\" && git add . && git commit --allow-empty -m \"REAL RUN: $(date)\" && rm -rf ./build && cmake -B ./build && cmake --build ./build && ./build/app' 2>&1 | tee /home/idomniko/build.out || echo \"error: AoC ditectory is not detected\"; error_menu ~/build.out %s<cr>", vim.v.servername), desc = "Run", cond = is_aoc_source},
+  { "<space>vu", string.format("<cmd>:tab :term [[ \"$PWD\" =~ \"advent_of_code/20\" ]] && bash -c 'echo \"AoC detected\" && git add . && git commit --allow-empty -m \"TEST RUN: $(date)\" && rm -rf ./build && cmake -B ./build -DTEST= && cmake --build ./build && ./build/app' 2>&1 | tee /home/idomniko/build.out || echo \"error: AoC ditectory is not detected\"; error_menu ~/build.out %s<cr>", vim.v.servername), desc = "Test", cond = is_aoc_source},
 
   { "g", group = "Go to..." },
   { "gD", "<cmd>lua vim.lsp.buf.definition()<cr>", desc = "Goto Defenition" },
