@@ -249,9 +249,9 @@ local use = packer.use
 
 -- Fancy symbols. TODO: Change to https://github.com/stevearc/aerial.nvim
   use {
-    'simrat39/symbols-outline.nvim',
+    'hedyhli/outline.nvim',
     config = function()
-      require("symbols-outline").setup()
+      require("outline").setup({})
     end,
   }
 
